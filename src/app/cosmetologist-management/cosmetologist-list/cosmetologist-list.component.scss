@@ -1,0 +1,54 @@
+table{
+  width: 100%;
+  border-collapse: inherit !important;
+  font-family: Raleway, sans-serif;
+}
+.mat-header-cell{
+  font-size: 17px !important;
+  background: #4BD13D !important;
+  color: white;
+  font-weight: 600;
+}
+.mat-cell-size{
+  font-size: 15px;
+  color: #585858;
+  font-weight: 500;
+  border: none;
+}
+.row{
+  flex-wrap: initial;
+}
+.mat-paginator-range-label{
+  padding-left: 20px;
+}
+.div-row-form{
+  padding:10px;
+}
+.row.div-row-form{
+  padding:0px;
+}
+.common{
+  display: inline-block;
+}
+
+td:first-child, th:first-child {
+  width: 20%;
+  text-align: center;
+}
+.no-data {
+  text-align: center;
+  margin-top: 10px;
+  color: black;
+}
+.view-icon {
+  color: #007bff;
+}
+.profile-width {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  border-radius: 100%;
+}
+tr:nth-child(even) {
+  background-color: #e0ebe0
+}

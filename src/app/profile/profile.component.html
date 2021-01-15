@@ -1,0 +1,247 @@
+ <div class="">
+
+        <!-- <div class="login-box-heading">
+
+          <button type="submit" mat-flat-button color="primary" class="display right-align edit-icon"
+                  (click)="editUpdate('edit')" *ngIf="!isUpdate">Edit</button>
+        </div> -->
+
+        <div class="details" *ngIf="!isUpdate">
+
+          <!-- <form [formGroup]="payoutForm"> -->
+            <h3 class="title title-payout">Profile details <span><mat-icon class="create-icon" (click)="editUpdate('edit')">create</mat-icon></span></h3>
+            <div class="panel-custom clearfix">
+              <div class="profile-section clearfix" style="background: #f4f4f7;">
+                <img src="{{profileDetails?.adminProfileUrl}}" (error)="setDefaultPic()"
+                     class="profile-pic">
+                <div class="display">
+                  <div class="profile-name-design">{{profileDetails?.userName}}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="line-height">
+              <div class="invLine"></div>
+              <div class="left-half details-left-half">
+                <div class="bold-font">User name: </div>
+              </div>
+
+              <div class="right-half">
+                <div class="details-color">{{profileDetails?.userName}}</div>
+
+                <!-- <div><span><strong>{{profileDetails?.userName}}</strong></span></div> -->
+              </div>
+
+              <div class="invLine"></div>
+              <div class="left-half details-left-half">
+                <div class="bold-font">Full name: </div>
+              </div>
+              <div class="right-half">
+                <div class="details-color">{{profileDetails?.fullName}}</div>
+              </div>
+  
+              <div class="invLine"></div>
+              <div class="left-half details-left-half">
+                <div class="bold-font">Email: </div>
+              </div>
+              <div class="right-half">
+                <div class="details-color">{{profileDetails?.email}}</div>
+              </div>
+              <div class="invLine"></div>
+              <div class="left-half details-left-half">
+                <div class="bold-font">Conatct Number: </div>
+              </div>
+              <div class="right-half">
+                <div class="details-color">{{profileDetails?.phone}}</div>
+              </div>
+
+              
+            <!-- <div class="form-group form-default">
+              <div>
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <div>
+
+                    <div class="left-half">
+                      <div class="bold-font">Profile Image</div>
+                    </div>
+                    <div class="right-half">
+                      <div class="fileinput-new thumbnail" style="width: 150px;">
+                        <img class="w-100" src="{{profileDetails?.adminProfileUrl}}">
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <div id="valid_msg" style="color: #e11221"></div>
+                </div>
+              </div>
+            </div> -->
+        
+            </div>
+
+        <!-- </form> -->
+          <!-- <div class="line-height">
+            <div class="left-half">
+              <div class="bold-font">User name</div>
+            </div>
+            <div class="right-half">
+              <div class="details-color">{{profileDetails?.userName}}</div>
+            </div>
+
+            <div class="left-half">
+              <div class="bold-font">Full name</div>
+            </div>
+            <div class="right-half">
+              <div class="details-color">{{profileDetails?.fullName}}</div>
+            </div>
+
+            <div class="invLine"></div>
+            <div class="left-half">
+              <div class="bold-font">Email</div>
+            </div>
+            <div class="right-half">
+              <div class="details-color">{{profileDetails?.email}}</div>
+            </div>
+            <div class="invLine"></div>
+            <div class="left-half">
+              <div class="bold-font">Conatct Number</div>
+            </div>
+            <div class="right-half">
+              <div class="details-color">{{profileDetails?.phone}}</div>
+            </div>
+            <div class="invLine"></div>
+
+
+
+            <div class="form-group form-default">
+              <div>
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <div>
+
+                    <div class="left-half">
+                      <div class="bold-font">Profile Image</div>
+                    </div>
+                    <div class="right-half">
+                      <div class="fileinput-new thumbnail" style="width: 150px;">
+                        <img class="w-100" src="{{profileDetails?.adminProfileUrl}}">
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <div id="valid_msg" style="color: #e11221"></div>
+                </div>
+              </div>
+            </div>
+
+
+          </div> -->
+
+        </div>
+
+
+        <div class="details" *ngIf="isUpdate">
+
+          <form [formGroup]="profileForm">
+            <h3 class="title title-payout">Profile form</h3>
+
+            <div class="line-height">
+            <div class="left-half">
+              <div class="bold-font">User name</div>
+            </div>
+            <div class="right-half">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label class="label-name">User name</mat-label>
+                <input matInput placeholder="User name" formControlName="userName">
+              </mat-form-field>
+            </div>
+
+              <div class="invLine"></div>
+                <div class="left-half">
+                  <div class="bold-font">Full name</div>
+                </div>
+                <div class="right-half">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label class="label-name">Full name</mat-label>
+                    <input matInput placeholder="User name" formControlName="fullName">
+                  </mat-form-field>
+                </div>
+
+            <div class="invLine"></div>
+            <div class="left-half">
+              <div class="bold-font">Email</div>
+            </div>
+            <div class="right-half">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label class="label-name">Email</mat-label>
+                <input type="email" matInput placeholder="Email" formControlName="email">
+              </mat-form-field>
+            </div>
+            <div class="invLine"></div>
+            <div class="left-half">
+              <div class="bold-font">Conatct Number</div>
+            </div>
+            <div class="right-half">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label class="label-name">Contact Number</mat-label>
+                <input matInput placeholder="Contact Number" formControlName="contact">
+              </mat-form-field>
+            </div>
+            <div class="invLine"></div>
+
+
+
+            <div class="form-group form-default">
+              <div>
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <div>
+
+                    <div class="left-half">
+                      <div class="bold-font">Profile Image</div>
+                    </div>
+                    <div class="right-half">
+                      <div class="fileinput-new thumbnail" style="width: 150px;">
+                        <img class="w-100" src="{{profileDetails?.adminProfileUrl}}">
+                      </div>
+
+
+                      <div class="btn btn-default btn-file">
+                        <span class="fileinput-new">
+                          <input type="hidden" value="" name="">
+                           <input #inputFile class="input-file" type="file" id="myFiles" accept=".png, .jpg, .jpeg, .png" (change)="fileChange($event)">
+                       </span>
+                      </div>
+                    </div>
+
+                    <a title="Remove" class="btn btn-sm btn-add-more">
+                      <i aria-hidden="true" class="fai fa-trash-o text-danger fa-lg "></i>
+                    </a>
+                  </div>
+                  <div id="valid_msg" style="color: #e11221"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="update-button">
+              <button type="submit" mat-flat-button color="primary"
+                      class="display edit-icon" (click)="onSubmit()">Save</button>
+
+              <button type="submit" mat-flat-button
+                      class="display cancel-button" (click)="cancel()">Cancel</button>
+            </div> -->
+
+            <div class="update-button">
+              <button type="submit" mat-flat-button color="primary"
+                      class="display edit-icon" (click)="profileUpdate()">Update</button>
+
+              <button type="submit" mat-flat-button
+                      class="display cancel-button" (click)="editUpdate('cancel')">Cancel</button>
+            </div>
+
+          </div>
+
+          </form>
+
+        </div>
+
+</div>

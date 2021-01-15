@@ -1,0 +1,15 @@
+<div class="tab-demo">
+  <mat-tab-group #tabGroup [(selectedIndex)]="demo1TabIndex" class="dxg">
+    <mat-tab label="Leave Management">
+    <!-- <mat-tab label="Tab 1" style="background-color: #4BD13D" > -->
+      <ng-template matTabContent>
+        <app-national-leave></app-national-leave>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Email-template">
+      <ng-template matTabContent>
+        <app-email-template></app-email-template>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

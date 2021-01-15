@@ -1,0 +1,177 @@
+.sidenav {
+  height: 100%;
+  width: 290px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+  color: inherit;
+  Box-shadow: 0px 3px 15px #eaeaea;
+}
+
+.mainnav a {
+  padding: 10px 0;
+  margin: 0 0 0 25px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 600;
+  color: #FFFFFF;
+  display: block;
+  font-family: Raleway, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.mainnav {
+  font-family: Raleway, sans-serif;
+  font-style: normal;
+}
+
+
+.topbar-overflow {
+  height: 64px;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.header_site_name {
+  visibility: hidden;
+  display: inline-block;
+  width: 3%;
+}
+
+@media (max-width: 767px) {
+  .header_site_name {
+    visibility: visible;
+  }
+}
+
+.page-wrapper {
+  width: calc(100% - 290px);
+  float: right;
+}
+
+@media screen and (max-width: 765px) {
+  .page-wrapper{
+    width: 100%;
+    float: unset;
+    padding: 20px;
+  }
+  .header-icon{
+    padding: 20px;
+    color: #333333;
+  }
+}
+
+/* Flickering css for hover for side bar starts here  */
+.tier ul {
+  list-style: none;
+  padding: 0%;
+}
+
+#tier2-1 ul {
+  list-style: none;
+  padding: 0%;
+  margin-bottom: 0;
+}
+
+#tier2-1 {
+  left: 0;
+  transition: 250ms;
+  padding: 15px 0;
+  margin-top: 330px;
+  text-decoration: none;
+  border-radius: 0 5px 5px 0;
+  width: 15%;
+  position: fixed;
+  background-color: #f1f3f4;
+  color: inherit;
+  height: fit-content;
+}
+
+.menu-hover {
+  position: relative;
+  cursor: pointer;
+}
+.menu-hover:hover {
+  background-color: #4BD13D;
+}
+.sidenav .menu-hover ul {
+  background: none repeat scroll 0 0 #f1f3f4;
+  left: 100%;
+  list-style: outside none none;
+  margin: 0;
+  padding: 10px !important;
+  position: absolute;
+  top: 0;
+  bottom: auto;
+  width: 200px;
+  z-index: 99999;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+
+.sidenav .menu-hover:hover ul {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+
+.sidenav .menu-hover:hover ul li a {
+  padding: 8px 0 8px 0;
+  text-decoration: none;
+  font-size: 13px;
+  color: #414141;
+  display: block;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.sidenav .menu-hover:hover ul li:hover {
+  background: #e6e6e6;
+}
+.side-header {
+  text-align: center;
+  background: black;
+}
+.side-header-name {
+  font-size: 25px;
+  color: #ffffff;
+  padding: 20px 0;
+}
+.header_search_call {
+  padding-left: 250px;
+  color: white;
+  font-size: 23px;
+  font-family: Raleway,sans-serif;
+}
+.active-menu {
+  background: #4BD13D;
+}
+
+
+
+#ticketCom {
+  background: white;
+  font-family: Raleway, sans-serif;
+}
+#tickets-cont-dev {
+  background: white;
+  min-height: 700px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+#tickets-cont-dev mat-card {
+  margin:  0;
+}
+#ticketCom .content {
+  background: #f2f3f5;
+  padding: 15px;
+}

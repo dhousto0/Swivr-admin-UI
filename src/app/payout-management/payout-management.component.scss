@@ -1,0 +1,144 @@
+.line-height {
+  line-height: 3;
+}
+
+.left-half {
+  left: 0;
+  width: 20%;
+  display: inline-block;
+  text-align: right;
+  color: #545454;
+}
+.right-half {
+  right: 0;
+  width: 50%;
+  display: inline-block;
+  margin-left: 50px;
+}
+
+.edit-icon {
+  margin: 17px;
+  background: #4BD13D;
+}
+
+.cancel-button {
+  margin: 17px;
+  background: lightgray;
+}
+
+.update-button {
+  width: 76% !important;
+  text-align: end;
+}
+
+.title {
+  padding: 10px 27px 10px 45px;
+  background: #4BD13D;
+  font-weight: bold;
+}
+
+.title-payout {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.create-icon {
+    margin-top: 0.2%;
+    float: right;
+    zoom: 0.85;
+}
+
+.toggle-button > input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-button {
+  display: inline-block;
+  position: relative;
+  width: 54px;
+  height: 22px;
+  border-radius: 30px;
+  background-color: #fff;
+  vertical-align: middle;
+  margin-right: 10px;
+  border: 1px solid #e8ecef;
+  margin-bottom: 0;
+}
+
+.active {
+  background-color: #4bd13dba !important;
+  color:#fff;
+}
+.mb-0 {
+  background-color: gray;
+  color:#fff;
+}
+
+.toggle-button .toggle-button-switch {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 100%;
+  cursor: pointer;
+  z-index: 100;
+  transition: left 0.3s;
+  border: 1px solid #e8ecef;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+
+.toggle-button > span {
+  font-size: 12px;
+  line-height: 20px;
+  transition: all 0.3s;
+}
+
+.toggle-button input[type="checkbox"] ~ .btnchk-yes {
+  display: none;
+  padding-left: 8px;
+}
+
+.toggle-button input[type="checkbox"] ~ .btnchk-no {
+  display: block;
+  padding-right: 10px;
+  text-align: right;
+}
+
+
+.toggle-button input[type="checkbox"]:checked ~ .toggle-button-switch {
+  left: 31px;
+}
+
+.toggle-button input[type="checkbox"]:checked ~ .btnchk-yes {
+  display: block;
+}
+
+.toggle-button input[type="checkbox"]:checked ~ .btnchk-no {
+  display: none;
+}
+
+.toggle-button input[type="checkbox"]:checked ~ .btnch-yes {
+  display: block;
+  margin-left: 7px;
+}
+
+.toggle-button input[type="checkbox"]:checked ~ .btnch-no {
+  display: block;
+}
+
+.toggle-button .switch {
+  left: 31px !important;
+}
+
+.btnch-yes {
+  position: absolute;
+  margin-left: 7px;
+}
+
+.btnch-no {
+  margin-left: 25px;
+  position: absolute;
+}

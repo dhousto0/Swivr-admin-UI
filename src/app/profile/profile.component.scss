@@ -1,0 +1,156 @@
+::ng-deep #test .mat-tab-group.mat-primary .mat-ink-bar {
+  width: 100% !important;
+}
+.table-fields mat-form-field {
+  font-size: 15px;
+}
+
+table {
+  width: 100%;
+  border: 1px solid lightgray;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.po-details-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.po-details-container > div {
+  margin-right: 150px;
+  padding: 5px;
+}
+.flex-container > div {
+  margin-right: 150px;
+  padding: 5px;
+}
+.sub-total-style {
+  margin-top: 20px;
+}
+
+.left-half {
+  left: 0;
+  width: 20%;
+  display: inline-block;
+  text-align: right;
+  color: #545454;
+}
+.right-half {
+  right: 0;
+  width: 50%;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.line-height {
+  line-height: 3;
+}
+
+.upload-half {
+  left: 0;
+  width: 12%;
+  display: inline-block;
+  margin-left: 65px;
+}
+.header {
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 0;
+  color: gray;
+}
+
+@media(max-width:320px){
+  .right-half {
+    margin-left: 38px;
+  }
+}
+@media (max-width: 450px) {
+  .general-back-half {
+    width: 63%;
+  }
+
+}
+@media(max-width:780px){
+  .flex-container > div {
+    margin-right: 0px;
+  }
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-top: 1.34375em;
+}
+.details-color {
+  color: #555;
+}
+.login-box-heading {
+  padding: 2pc 6pc 0 6pc;
+}
+.right-align {
+  float: right;
+}
+.edit-icon {
+  margin: 17px;
+  background: #4BD13D;
+}
+.cancel-button {
+  margin: 17px;
+  background: lightgray;
+}
+// .update-button {
+//   padding: 2pc 13pc;
+// }
+
+.title {
+  padding: 10px 27px 10px 45px;
+  background: #4BD13D;
+  font-weight: bold;
+}
+
+.title-payout {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.create-icon {
+    margin-top: 0.2%;
+    float: right;
+    zoom: 0.85;
+}
+
+.update-button {
+  width: 76% !important;
+  text-align: end;
+}
+
+.profile-section {
+  text-align: center;
+  min-height:80px;
+  padding: 10px 0;
+  font-size: 14px;
+  margin: 0 0 10px 0;
+  color: #000000;
+
+  &:hover {
+    -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    border-radius: 5px;
+  }
+}
+
+.profile-pic{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
+
+.profile-name-design {
+  font-size: 16px;
+  padding: 25px;
+}
+
+.details-left-half {
+  width: 48% !important;
+}

@@ -1,0 +1,48 @@
+.profile-btn {
+  float: right;
+  padding  : 0 5px 0 5px;
+  font-size: 16px;
+  min-width: auto;
+  .icon-down-arrow {
+    padding-left: 8px;
+    font-size   : 10px;
+  }
+}
+
+
+.userName-btn mat-icon {
+  position: relative;
+  top: 4px;
+  left: 5px;
+}
+
+.profile-pic{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+#headLeft {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 12px;
+  display: inline-block;
+  color: #FFFFFF;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  align-items: start;
+  padding: 10px;
+}
+
+@media(max-width:320px) {
+  ::ng-deep .mat-button {
+    padding: 0 !important;
+  }
+}
+@media(max-width: 780px) {
+  .padding-remove {
+    padding: 0 !important;
+  }
+
+}

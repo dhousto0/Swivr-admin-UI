@@ -1,0 +1,102 @@
+<div class="row-main row">
+    <div class="col-sm-6">
+      <div class="roles_policies_tbl">
+
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="National Holiday">
+            <th mat-header-cell *matHeaderCellDef class="mat-header-size">National Holiday</th>
+            <td mat-cell *matCellDef="let data" class="mat-cell-size">
+                {{data?.nationalLeaves}}
+              </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Date">
+            <th mat-header-cell *matHeaderCellDef class="mat-header-size">Date</th>
+            <td mat-cell *matCellDef="let data" class="mat-cell-size">
+              {{data?.date | date: "YYYY-MM-dd"}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef class="mat-header-size">Action</th>
+            <td mat-cell *matCellDef="let data;let i = index" class="mat-cell-size">
+              <a class="btn btn-sm btn-action">
+                <div class="ripple" matTooltip="Edit" (click)="editNationalLeave(data)">
+                  <i class="far fa-edit edit-icon"></i>
+                </div>
+              </a>
+              <a class="btn btn-sm btn-action">
+                <div class="ripple">
+                  <button class="btn btn-assigned" (click)="deleteNationalLeave(data?.id)">
+                    <i class="fas fa-trash-alt delete-icon"></i>
+                  </button>
+                </div>
+              </a>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnTitle"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnTitle;"></tr>
+        </table>
+        <div *ngIf="rowCount === 0" class="no-data">No Data</div>
+        <mat-paginator #paginator [pageSizeOptions]="pageSizeArray" showFirstLastButtons (page)="onChange($event)" [length]="rowCount" [pageSize]="limit"></mat-paginator>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <mat-card>
+        <div class="field-div">
+          <div class="row">
+            <div class="col-sm-10 policy-header-div">
+              <mat-label class="policy-header-label">Create Holidays</mat-label>
+            </div>
+          </div>
+          <hr class="hr-class">
+          <form novalidate #formDirective="ngForm" [formGroup]="nationalLeaveForm" >
+            <div class="form-group form-div">
+              <div class="row div-row-form">
+
+                <div class="col-sm-4 roles-col-size">
+                    <label class="field_label">National Holiday Date</label>
+                </div>
+                <div class="col-sm-8 form-col-size">
+                    <div class="row div-row-form">
+                      <div class="col-sm-12">
+                        <mat-form-field class="example-full-width w-100" appearance="outline">
+                          <mat-label>National Holiday Date</mat-label>
+                          <input name="date" matInput type="text" placeholder="Holiday Date" formControlName="date" required>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row div-row-form">
+                <div class="col-sm-4 roles-col-size">
+                  <label class="field_label">National Holiday</label>
+                </div>
+                <div class="col-sm-8 form-col-size">
+                  <div class="row div-row-form">
+                    <div class="col-sm-12">
+                      <mat-form-field class="example-full-width w-100" appearance="outline">
+                        <mat-label>Holiday Name</mat-label>
+                        <input name="nationalLeaves" matInput type="text" placeholder="Holiday Name" formControlName="nationalLeaves" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-8 div-col-createRole">
+                      <button *ngIf="!isUpdate" name="submitBtn" mat-button class="service-update" type="submit" (click)="addUpdateNationalLeave()">Save</button>
+                      <button *ngIf="isUpdate" name="submitBtn" mat-button class="service-update" type="submit" (click)="addUpdateNationalLeave()">Update</button>
+                      <button type="button" class="btn form-button-40 cancel-button" (click)="cancel()">Cancel</button>
+                    </div>
+                 </div>
+                </div>
+
+          
+               
+              </div>
+            </div>
+          </form>
+        </div>
+      </mat-card>
+    </div>
+  </div>

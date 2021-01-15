@@ -1,0 +1,27 @@
+<div id="headLeft">
+  <button mat-icon-button class="m-r-5">
+    <img *ngIf="userProfileImg; else defaultUserImg" src="{{userProfileImg}}" alt="{{userProfileImg}}" class="profile-pic">
+    <ng-template #defaultUserImg>
+      <img src="../../../assets/img/default_user_profile.jpg" class="profile-pic">
+    </ng-template></button>
+  <button mat-button [matMenuTriggerFor]="profile" class="p-l-0 userName-btn padding-remove" overlapTrigger="false">
+    <span>{{fullname}}</span>
+  </button>
+
+  <mat-menu #profile="matMenu" class="mymegamenu">
+
+    <button (click)="userProfile('profile')" mat-menu-item>
+      Profile
+    </button>
+    <button mat-menu-item (click)="userProfile('reset')">
+      Reset Password
+    </button>
+  </mat-menu>
+
+
+  <button mat-button (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    Logout
+  </button>
+
+</div>

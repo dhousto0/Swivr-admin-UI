@@ -1,0 +1,35 @@
+<div class="CSlogin main-online-order">
+  <div class="container-fluid login-content" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="4" fxLayoutAlign="space-around">
+    <div fxFlex="33" fxFlex.lt-sm="100">
+      <div class="login-box">
+
+        <div class="side-header">
+          <img class="logo-image" src="assets/img/logo.png">
+          <div class="side-header-name">SWIVR</div>
+        </div>
+        <form novalidate [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="background: white">
+
+
+          <div class="label-width">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label class="label-name">Username</mat-label>
+              <input matInput placeholder="Username" formControlName="username">
+            </mat-form-field>
+          </div>
+
+          <div class="label-width">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label class="label-name">Password</mat-label>
+              <input type="password" matInput placeholder="Password" formControlName="password">
+            </mat-form-field>
+          </div>
+          <div class="login-submit label-width">
+            <button type="submit" mat-flat-button color="primary" class="w-100" (click)="onSubmit()">Sign In</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

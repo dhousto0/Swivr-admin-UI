@@ -1,0 +1,192 @@
+.left-half {
+  left: 0;
+  width: 20%;
+  display: inline-block;
+  text-align: right;
+  color: #545454;
+}
+.right-half {
+  right: 0;
+  width: 50%;
+  display: inline-block;
+  margin-left: 50px;
+}
+.header {
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 0;
+  color: gray;
+}
+h2 {
+  font-family: Raleway, sans-serif;
+}
+.content-left-area-tickets-single {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+
+  h3 {
+    margin: 0 0 10px 0;
+    word-break: break-all;
+    font-weight: 700;
+    color: #666666;
+  }
+}
+
+.detail_section {
+  min-height:80px;
+  padding: 18px 0;
+  font-size: 14px;
+  margin: 0 0 10px 0;
+  color: #000000;
+
+  &:hover {
+    -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    border-radius: 5px;
+  }
+}
+
+.profile-section {
+  text-align: center;
+  min-height:80px;
+  padding: 10px 0;
+  font-size: 14px;
+  margin: 0 0 10px 0;
+  color: #000000;
+
+  &:hover {
+    -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    border-radius: 5px;
+  }
+}
+
+.profile-pic{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
+.profile-name-design {
+  font-size: 16px;
+  padding: 25px;
+}
+.profile-section-split {
+  padding: 25px 20px 25px 44px;
+}
+.shop-section-split {
+  padding: 25px 44px 25px 10px;
+}
+.content-header {
+  background: #E8E8E8;
+  color: #212121 !important;
+}
+.back-icon {
+  vertical-align: middle;
+}
+
+::ng-deep .no_border{
+  border:none;
+  height: 50px;
+}
+.no_border td{
+  border: none;
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+  vertical-align: text-top;
+}
+.no_border th{
+  border: none;
+  background-color: #f9f9f9;
+  border-bottom:0.5px #898989;
+}
+
+.no_border tr:last-child{
+  border-bottom: #000000;
+}
+
+.no_border:nth-child(odd) {
+  background-color: #fff;
+}
+.no_border:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.data-format{
+  color:black;
+  font-weight:500;
+  font-size: 14px;
+}
+.data-format .btn {
+  padding:4px;
+}
+
+.data_format{
+  margin-top:2px;
+}
+
+.milestoneDetail .profile-pic{
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.no-data {
+  text-align: center;
+  margin-top: 10px;
+  color: black;
+  padding-bottom: 32px;
+}
+
+.milestone-header{
+  background-color: #f9f9f9;
+  border-bottom: 2px solid #939393;
+  height: 42px;
+}
+
+::ng-deep .projectDetails .milestone_name {width: 40%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+
+::ng-deep .projectDetails .milestone_name:hover {word-break: break-word;white-space: normal;}
+
+
+::ng-deep .ui-treetable-table .milestone_name span.data_format {
+  margin: 0;
+}
+
+::ng-deep .ui-treetable-table .milestone_name span {
+  margin-left: 35px;
+}
+
+.milestone_row ::ng-deep  .mat-tab-header{
+  display: none;
+}
+.customer-profile {
+  width: 15%;
+  border-radius: 69%;
+  margin: 10px;
+}
+.center-align {
+  text-align: center;
+}
+.review-align {
+  width: 500%;
+  margin-left: 5pc;
+}
+.image-pad {
+  padding: 15px;
+}
+.review-image {
+  width: 7%;
+  margin: 20px;
+}
+.review-title {
+  font-size: 15px;
+  padding: 10px 50px;
+  color: darkgreen;
+}
+.star-color {
+  color: gold;
+}

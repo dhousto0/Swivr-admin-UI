@@ -1,0 +1,55 @@
+<div class="row-main row">
+  <div class="col-sm-12">
+    <div class="border-list roles_policies_tbl">
+
+      <table mat-table [dataSource]="dataSource" class="table-format">
+
+        <ng-container matColumnDef="Client Profile">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-size">Client Profile</th>
+          <td mat-cell *matCellDef="let data; let i = index" class="mat-cell-size"><a style="cursor: pointer">
+            <div class="width-roleName">
+              <img class="profile-width" src="{{data.profileUrl}}" (error)="setDefaultPic(i)">
+            </div>
+          </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Client Name">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-size">Client Name</th>
+          <td mat-cell *matCellDef="let data" class="mat-cell-size">
+            <a href="client/details/{{data.custKey}}">{{data.fullName}}</a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Email">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-size">Email</th>
+          <td mat-cell *matCellDef="let data" class="mat-cell-size">
+            {{data.email}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Phone">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-size">Phone</th>
+          <td mat-cell *matCellDef="let data" class="mat-cell-size">
+            {{data.phone}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef class="mat-header-size">Action</th>
+          <td mat-cell *matCellDef="let data;let i = index" class="mat-cell-size">
+            <a class="btn btn-sm btn-action" href="client/details/{{data.custKey}}">
+              <div class="ripple" matTooltip="View details">
+                <i class="fas fa-list view-icon"></i>
+              </div>
+            </a>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnTitle"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnTitle;"></tr>
+      </table>
+      <div *ngIf="rowCount === 0" class="no-data">No Data</div>
+      <mat-paginator #paginator [pageSizeOptions]="pageSizeArray" showFirstLastButtons (page)="onChange($event)" [length]="rowCount" [pageSize]="limit"></mat-paginator>
+    </div>
+  </div>
+</div>

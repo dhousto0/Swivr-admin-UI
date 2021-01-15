@@ -1,0 +1,155 @@
+
+
+<div class="details" *ngIf="!isUpdate">
+
+                <form [formGroup]="payoutForm">
+                    <h3 class="title title-payout">Payout details <span><mat-icon class="create-icon" (click)="editUpdate()">create</mat-icon></span></h3>
+                    <div class="line-height">
+                      <div class="invLine"></div>
+                      <div class="left-half">
+                        <div class="bold-font">Payout:</div>
+                      </div>
+
+                      <div class="right-half">
+                        <h4 class="heading mb-20" *ngIf="payoutDetails?.isPayout">
+                          <label class="toggle-button mb-0" for="btnchk-pay" [class.active]="payoutDetails?.isPayout">
+                            <input type="checkbox" id="btnchk-pay" name="isPayout" [disabled]="true">
+                            <label class="toggle-button-switch switch"></label>
+                            <span class="btnch-yes">Yes</span>
+                            <!-- <span class="btnch-no">No</span> -->
+                          </label>
+                        </h4>
+                        <h4 class="heading mb-20" *ngIf="!payoutDetails?.isPayout">
+                          <label class="toggle-button mb-0" for="btnchk-pay">
+                            <input type="checkbox" id="btnchk-pay" name="isPayout" [disabled]="true">
+                            <label class="toggle-button-switch"></label>
+                            <!-- <span class="btnch-yes">Yes</span> -->
+                            <span class="btnch-no">No</span>
+                          </label>
+                        </h4>
+                      </div>
+
+                      <div class="invLine"></div>
+                        <div class="left-half" *ngIf="payoutDetails?.isPayout"><div class="bold-font">Payout Value: </div></div>
+                        <div class="right-half" *ngIf="payoutDetails?.isPayout"><div><span><strong>{{payoutDetails?.payout}} %</strong></span></div></div>
+
+                        <h3 class="title">Stripe details</h3>
+
+                        <div class="invLine"></div>
+                        <div class="left-half">
+                            <div class="bold-font">Stripe Account Name:</div>
+                        </div>
+                        <div class="right-half">
+                            <div><span><strong>{{payoutDetails?.stripeName}}</strong></span></div>
+                        </div>
+
+                        <div class="invLine"></div>
+                        <div class="left-half">
+                            <div class="bold-font">Publishable key:</div>
+                        </div>
+                        <div class="right-half">
+                            <div><span><strong>{{payoutDetails?.publicKey}}</strong></span></div>
+
+                        </div>
+
+                        <div class="invLine"></div>
+                        <div class="left-half">
+                            <div class="bold-font">Secret key:</div>
+                        </div>
+                        <div class="right-half">
+                            <div><span><strong>{{payoutDetails?.privateKey}}</strong></span></div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+<div class="details" *ngIf="isUpdate">
+
+            <form [formGroup]="payoutForm">
+              <h3 class="title title-payout">Payout details</h3>
+              <div class="line-height">
+                <div class="left-half">
+                  <div class="bold-font">Payout</div>
+                </div>
+
+                <div class="right-half">
+                  <h4 class="heading mb-20">
+                    <label class="toggle-button mb-0" for="btnchk-payout" [class.active]="payoutDetails?.isPayout">
+                      <input type="checkbox" id="btnchk-payout" (change)="toggleButtonPayout($event)" name="isPayout"
+                        formControlName="isPayout">
+                      <label class="toggle-button-switch"></label>
+                      <span class="btnchk-yes">Yes</span>
+                      <span class="btnchk-no">No</span>
+                    </label>
+                  </h4>
+                </div>
+
+              <div class="invLine"></div>
+
+              <div class="left-half" *ngIf="payoutDetails?.isPayout">
+                <div class="bold-font">Payout Value</div>
+              </div>
+              <div class="right-half" *ngIf="payoutDetails?.isPayout">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label class="label-name">Payout</mat-label>
+                  <input matInput placeholder="Payout" formControlName="payout">
+                </mat-form-field>
+              </div>
+
+
+              <h3 class="title">Stripe details</h3>
+
+              <div class="invLine"></div>
+              <div class="left-half">
+                <div class="bold-font">Stripe Account Name</div>
+              </div>
+              <div class="right-half">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label class="label-name">Stripe Account Name</mat-label>
+                  <input matInput placeholder="Stripe Account Name" formControlName="stripeName">
+                </mat-form-field>
+              </div>
+
+                <div class="invLine"></div>
+                  <div class="left-half">
+                    <div class="bold-font">Publishable key</div>
+                  </div>
+                  <div class="right-half">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label class="label-name">Publishable key</mat-label>
+                      <input matInput placeholder="Publishable key" formControlName="publishableKey">
+                    </mat-form-field>
+                  </div>
+
+              <div class="invLine"></div>
+              <div class="left-half">
+                <div class="bold-font">Secret key</div>
+              </div>
+              <div class="right-half">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label class="label-name">Secret key</mat-label>
+                  <input type="text" matInput placeholder="Secret key" formControlName="secretkey">
+                </mat-form-field>
+              </div>
+
+              <div class="invLine"></div>
+
+
+              <div class="update-button">
+                <button type="submit" mat-flat-button color="primary"
+                        class="display edit-icon" (click)="onSubmit()">Save</button>
+
+                <button type="submit" mat-flat-button
+                        class="display cancel-button" (click)="cancel()">Cancel</button>
+              </div>
+
+            </div>
+
+            </form>
+
+          </div>
+

@@ -1,0 +1,219 @@
+.icon-size{
+    font-size:1.8em;
+  }
+  table{
+    width: 100%;
+    border-collapse: inherit !important;
+    font-family: Raleway, sans-serif;
+  }
+  .mat-header-cell{
+    font-size: 17px !important;
+    background: #4BD13D !important;
+    color: white;
+    font-weight: 600;
+  }
+  .mat-cell-size{
+    font-size: 15px;
+    color: #585858;
+    font-weight: 500;
+    border: none;
+  }
+  .delete-icon{
+    color:#f05050;
+  }
+  .disable-icon{
+    pointer-events: none;
+    color:#f05050;
+    opacity: 0.5;
+  }
+  .edit-icon{
+    color:#337ab7;
+    font-size: 16px!important;
+  }
+  .text-span{
+    color:red;
+  }
+  .icon-action{
+    font-size: 1.2em;
+  }
+  .btn-action-delete{
+    margin:5px;
+  }
+  .alert-message{
+    color:red;
+  }
+  .searchPolicies{
+    margin:2%;
+  }
+  
+  .btn-policies{
+    margin:2%;
+  }
+  .row{
+    flex-wrap: initial;
+  }
+  .btn-action{
+    margin:0 5%;
+    padding:0px;
+    background-color:transparent;
+  }
+  .policies-li{
+    padding:4px;
+  }
+  .disabled{
+    color: gray;
+    cursor: not-allowed;
+  }
+  .mat-paginator-range-label{
+    padding-left: 20px;
+  }
+  table{
+    width: 100%;
+  }
+  
+  .searchLabel{
+    float: right;
+  }
+  .icon-fonts-action{
+    color:white;
+  }
+  .div-row-form{
+    padding:10px;
+  }
+  .label-employee-form{
+    font-weight:200;
+    color:darkslategrey;
+    margin-top:12%;
+  }
+  .description-height{
+    height:55px;
+  }
+  .close-class{
+    background: transparent;
+    color:rgb(88, 120, 122);
+  }
+  .div-col-createRole{
+    margin-top:5%;
+    font-size: 14px;
+    border-radius: 50px;
+  }
+  .field_label{
+    display: block;
+    width: 100%;
+    float: left;
+    padding: 0 0;
+    font-size: 12px;
+    color: #000000;
+    font-weight: 500;
+  }
+  .field-div{
+    padding:20px;
+  }
+  .cancel{
+    color: black;
+    margin-left: 5%;
+    width: 35%;
+    border-radius: 30px;
+    padding:7px;
+  }
+  .row.div-row-form{
+    padding:0px;
+  }
+  .green{
+    color:white;
+    background-color: rgb(72, 218, 72);
+  }
+  .mat-cell-actionbtn{
+    margin:2px;
+  }
+  .searchPoliciesInput{
+    width:30%;
+    padding-left:7px;
+  }
+  .policies-action-div{
+    margin-left: 7%;
+  }
+  .policies-data{
+    font-size:1.2em;
+  }
+  .common{
+    display: inline-block;
+  }
+  .policiesSearch{
+    margin-left:2%;
+  }
+  .row{
+    flex-wrap: initial;
+  }
+  .form-col-size{
+    width:70%;
+  }
+  .roles-col-size{
+    width:28%;
+  }
+  .form-div{
+    padding-top:10px;
+  }
+  .policy-header-label{
+    color:rgba(0, 0, 0, 0.87);
+    font-weight:600;
+    font-size:1em;
+  }
+  
+  .policy-header-div{
+    margin-bottom: 10px;
+  }
+  
+  td:first-child, th:first-child {
+    width: 30%;
+    text-align: center;
+  }
+  
+  .width-roleName {
+    width: 200px;
+    word-wrap: break-word;
+  }
+  
+  .form-button-40{
+    height: 40px!important;
+  }
+  
+  .table-fields {
+    padding: 5px 0;
+  }
+  
+  .no-data {
+    text-align: center;
+    margin-top: 10px;
+    color: black;
+  }
+  .no-record-found {
+    text-align: center;
+    padding-top: 5px;
+  }
+  .roles_policies_tbl .btn-assigned{
+    background: transparent;
+    font-size: 16px;
+    padding: 0px;
+    cursor: pointer;
+  }
+  
+  .cross_icon{    float: right;
+    top: 15px;
+    position: absolute;
+    right: 28px;
+  }
+  .serivice-title {
+    padding: 0 2pc;
+  }
+  .service-update {
+    background: #4BD13D;
+  }
+  .cancel-button {
+    margin: 17px;
+    background: lightgray;
+  }
+  tr:nth-child(even) {
+    background-color: #e0ebe0
+  }
+  

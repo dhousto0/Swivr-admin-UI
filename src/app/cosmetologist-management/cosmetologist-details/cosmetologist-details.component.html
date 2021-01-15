@@ -1,0 +1,202 @@
+<section class="content-header">
+          <button mat-button>
+            <a href="/cosmetologist">
+            <mat-icon class="back-icon">keyboard_arrow_left</mat-icon>
+            <span > Back to Cosmetologist List</span>
+            </a>
+          </button>
+        </section>
+
+<div class="row">
+          <div class="col-md-6 profile-section-split">
+            <div class="content-left-area-tickets-single organization-details">
+              <h2>Costmetologist Profile</h2>
+              <div class="panel-custom clearfix">
+                <div class="profile-section clearfix" style="background: #f4f4f7;">
+                  <img src="{{cosmetologistDetails?.userProfileUrl}}" (error)="setDefaultPic('user', '')"
+                       class="profile-pic">
+                  <div class="display">
+                    <div class="profile-name-design">{{cosmetologistDetails?.fullName}}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-custom clearfix">
+                <div class="detail_section clearfix">
+                  <div class="row col-md-12">
+                    <div class="col-md-2">
+                      <div> <span class="left_labels">
+                            Address : </span></div>
+                    </div>
+                    <div class="col-md-9">
+                      <div><span><strong>{{cosmetologistDetails?.address}}</strong></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-custom clearfix">
+                <div class="detail_section clearfix">
+                  <div class="row col-md-12">
+                    <div class="col-md-6 row">
+                    <div class="col-md-3">
+                      <div> <span class="left_labels">
+                            Email: </span></div>
+                    </div>
+                    <div class="col-md-9">
+                      <div><span><strong>{{cosmetologistDetails?.email}}</strong></span></div>
+                    </div>
+                    </div>
+                    <div class="col-md-6 row">
+                    <div class="col-md-6">
+                      <div> <span class="left_labels">
+                          Contact Number: </span></div>
+                    </div>
+                    <div class="col-md-6">
+                      <div><span><strong>{{cosmetologistDetails?.phone}}</strong></span></div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+
+          <div class="col-md-6 shop-section-split" *ngIf="cosmetologistDetails?.shopId">
+            <div class="content-left-area-tickets-single organization-details">
+              <h2>Shop Profile</h2>
+              <div class="panel-custom clearfix">
+                <div class="profile-section clearfix" style="background: #f4f4f7;">
+                  <img src="{{shopDetails?.shopImageUrl}}" (error)="setDefaultPic('shop', '')"
+                       class="profile-pic">
+                  <div class="display">
+                    <div class="profile-name-design">{{shopDetails?.shopName}}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-custom clearfix">
+                <div class="detail_section clearfix">
+                  <div class="row col-md-12">
+                    <div class="col-md-2">
+                      <div> <span class="left_labels">
+                            Address : </span></div>
+                    </div>
+                    <div class="col-md-9">
+                      <div><span><strong>{{shopDetails?.address}}</strong></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-custom clearfix">
+                <div class="detail_section clearfix">
+                  <div class="row col-md-12">
+                    <div class="col-md-6 row">
+                      <div class="col-md-5">
+                        <div> <span class="left_labels">
+                            Email : </span></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div><span><strong>{{shopDetails.email}}</strong></span></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 row">
+                      <div class="col-md-6">
+                        <div> <span class="left_labels">
+                          Contact Number : </span></div>
+                      </div>
+                      <div class="col-md-6">
+                        <div><span><strong>{{shopDetails?.phone}}</strong></span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+
+
+        </div>
+
+ <div class="row">
+   <div class="col-md-12 profile-section-split">
+     <div class="content-left-area-tickets-single organization-details">
+        <h2>Appointments</h2>
+          <div class="page search-results"  infiniteScroll
+                   [infiniteScrollDistance]="2"
+                   [infiniteScrollThrottle]="50"
+                   (scrolled)="onScroll()">
+
+          <p-treeTable [value]="appointmentList"  [(selection)]="selectedPortfolio">
+            <ng-template pTemplate="header">
+                  <tr class="no_border  milestone-header">
+                    <th class="milestone_name center-align">Customer</th>
+                    <th class="milestone_name">Service Time</th>
+                    <th class="milestone_start_dt">Appointment Date</th>
+                    <th class="milestone_start_dt">Appointment Status</th>
+                    <th class="milestone_due_dt">Service Amount</th>
+                    <th class="milestone_due_dt"> Payment Status</th>
+                  </tr>
+                </ng-template>
+            <ng-template pTemplate="body" let-rowNode let-node="node">
+              <tr class="no_border">
+                 <td class="data-format milestone_name">
+<!--                      <p-treeTableToggler *ngIf="node.review.length > 0" class="toggler-class" [rowNode]="rowNode"></p-treeTableToggler>-->
+                  <span><img class="customer-profile" src="{{node?.customerDetails.profileUrl}}" (error)="setDefaultPic('appointment', node)"></span>
+                      <span class="data_format" (click)="toggleNode(rowNode)" *ngIf="node.review.length > 0">{{node?.customerDetails.fullName}}  {{node?.appointmentId}}</span>
+                      <span class="data_format" *ngIf="node.review.length === 0">{{node?.customerDetails.fullName}}</span>
+                      <span *ngIf="node?.review.length">
+                         <div class="review-title">Review</div>
+                        <div *ngFor="let element of node?.review"class="review-align">
+                          <span class="image-pad">Reviewed By : {{element.fullName}} </span>
+                          <span class="image-pad">
+                          <span>Rating : </span> <span *ngFor="let in of counter(element.Ratings)"><i class="fas fa-star star-color"></i></span></span>
+                          <span class="image-pad">Comments: {{element.comments}}</span>
+                          <div>
+                          <span *ngFor="let data of element.imageurl">
+                          <img class="review-image" src="{{data.url}}"></span>
+                            </div>
+                        </div>
+
+                      </span>
+                    </td>
+
+                    <td class="data-format milestone_start_dt">
+                      <span>{{node?.serviceTime}}</span>
+                    </td>
+
+                    <td class="data-format milestone_start_dt">
+                      <span>{{node.appointmentDate | date: 'medium'}}</span>
+               </td>
+
+               <td class="data-format milestone_task-status">
+                   <div class="ripple">
+                   <span class="tag-btn progressButton" [ngStyle]="node.appointmentStatus === 0 ? {'color': 'blue'} : (node.appointmentStatus === 1 ? {'color': 'violet'} : (node.appointmentStatus === 3 ? {'color': 'orange'} : (node.appointmentStatus === 4 ? {'color': 'red'} : (node.appointmentStatus === 5 ? {'color': 'green'} : {'color': 'black'}))))">{{node?.appointmentStatusText | titlecase}}</span>
+                </div>
+                </td>
+
+                 <td class="data-format milestone_progress">
+                 <span>  {{node?.serviceAmount}}</span>
+               </td>
+
+               <td class="data-format milestone_progress">
+               <span [ngStyle]="node.paymentStatus === 0 ? {'color': 'blue'} : (node.paymentStatus === 1 ? {'color': 'red'} : (node.paymentStatus === 2 ? {'color': 'green'} : (node.paymentStatus === 3 ? {'color': 'orange'} : {'color': 'black'})))">  {{node?.paymentStatusText | titlecase}}</span>
+              </td>
+
+           </tr>
+
+          </ng-template>
+      </p-treeTable>
+     </div>
+    <div class="no-data" *ngIf="appointmentCount === 0">No data available</div>
+   </div>
+
+  </div>
+ </div>

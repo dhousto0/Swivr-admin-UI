@@ -1,0 +1,49 @@
+.CSlogin{
+  background: #ffffff;
+}
+
+.side-header {
+  text-align: center;
+}
+.side-header-name {
+  font-size: 25px;
+  color: #ffffff;
+  padding: 10px 0;
+}
+.logo-image {
+  width: 30%;
+}
+.label-width {
+  padding: 1pc 2pc 0 2pc;
+}
+.login-submit {
+  padding-bottom: 2pc;
+}
+::ng-deep .CSlogin.main-online-order{
+
+  .login-box{
+    box-shadow: 1px 1.732px 3px 0 #dcdcdc;
+    border-radius: 2px;
+    background-color: #000;
+    padding: 35px 20px 60px;
+    border: 1px solid #dcdcdc;
+  }
+}
+
+.main-online-order{
+  background: white;
+  padding: 7pc;
+  .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary,
+  .mat-flat-button.mat-primary a{
+    color: #fff;
+    background-color: #4BD13D;
+  }
+}
+
+@media (max-width:600px){
+  ::ng-deep .CSlogin.main-online-order{
+    .login-box{
+      padding: 24px 16px;
+    }
+  }
+}

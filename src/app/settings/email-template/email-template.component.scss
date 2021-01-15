@@ -1,0 +1,50 @@
+.edit-icon {
+    margin: 17px;
+    background: #4BD13D;
+  }
+
+  .pull-right {
+    text-align: end;
+  }
+//   ::ng-deep .mat-tab-list .mat-tab-label {
+//     font-weight: 700!important;
+//   }
+
+
+
+  .btn-group1 button {
+    display: inline-block !important;
+    margin: 0px 5px 5px;
+    margin-top: 12px;
+  }
+  
+  .btn-group1 button:active {
+    color: #333 !important;
+    text-decoration: none !important;
+  }
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background: #22b812ad !important;
+  color: white;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.cancel-button {
+  margin: 17px;
+  background: lightgray;
+}

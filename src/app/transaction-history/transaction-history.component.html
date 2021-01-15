@@ -1,0 +1,36 @@
+<div>
+  <section>
+    <div>
+        <div class="panel-body search-results" infiniteScroll
+              [infiniteScrollDistance]="2"
+              [infiniteScrollThrottle]="50"
+              (scrolled)="onScroll()">
+
+            <ul class="comments-list" *ngFor="let activity of dataSource">
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-1 image-UI">
+                    <img class="img-circle" src="{{activity.custProfileUrl}}">
+                  </div>
+                <div class="col-md-11">
+                <div class="content-split">
+                  <strong class="block">
+                    {{activity.customerName.substring(0, 1).toUpperCase() +
+                  activity.customerName.substring(1).toLowerCase()}}
+                  </strong>
+                  <span class="pull-right">
+                    {{ activity.createdTime | date:'medium' }}
+                  </span>
+                </div>
+
+                <div class="message">
+                  {{activity.message}}<strong style="color:#007bff">
+                </strong>
+                </div>
+                </div>
+                </div>
+              </li>
+            </ul>
+        </div></div>
+  </section>
+</div>

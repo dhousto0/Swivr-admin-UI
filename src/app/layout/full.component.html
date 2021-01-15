@@ -1,0 +1,102 @@
+<div class="main-container">
+
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="0"
+                         style="visibility: visible; min-height: 500px">
+    <!-- ============================================================== -->
+    <!-- Sidebar - style you can find in sidebar.scss -->
+    <!-- ============================================================== -->
+    <mat-sidenav #snav id="snav" class="dark-sidebar pl-xs sidebar-background" [mode]="'side'"
+                 fixedTopGap="0" [opened]="true" [disableClose]="true">
+
+
+
+      <div class="sidenav">
+
+        <div class="side-header">
+          <img class="w-50" src="/assets/img/logo.png">
+          <div class="side-header-name">SWIVR</div>
+        </div>
+
+        <div class="mainnav">
+          <div class="tier">
+            <ul>
+              <li class="menu-hover" [ngClass]="router.url === '/services' ? 'active-menu': 'inactive-menu'"><a (click)="navigateMenu('/services')">Service Management</a> </li>
+              <li class="menu-hover" [ngClass]="router.url === '/cosmetologist' || type === 'Cosmetologist Management' ? 'active-menu': 'inactive-menu'"><a (click)="navigateMenu('/cosmetologist')">Cosmotologist Management</a> </li>
+              <li class="menu-hover" [ngClass]="router.url === '/client' || type === 'Client Management' ? 'active-menu': 'inactive-menu'"><a (click)="navigateMenu('/client')">Client Management</a> </li>
+              <li class="menu-hover" [ngClass]="router.url === '/payout' || type === 'Payout Management' ? 'active-menu': 'inactive-menu'">  <a (click)="navigateMenu('/payout')">Payout Management</a> </li>
+              <li class="menu-hover" [ngClass]="router.url === '/transactionHistory' ? 'active-menu': 'inactive-menu'">  <a (click)="navigateMenu('/transactionHistory')">Transaction History</a> </li>
+              <li class="menu-hover" [ngClass]="router.url === '/settings'  ? 'active-menu': 'inactive-menu'"><a (click)="navigateMenu('/settings')">Settings</a> </li>
+
+            </ul>
+
+          </div>
+        </div>
+
+      </div>
+
+    </mat-sidenav>
+    <!-- ============================================================== -->
+    <!-- Sidebar - style you can find in sidebar.scss -->
+    <!-- ============================================================== -->
+    <mat-sidenav-content class="topbar-overflow">
+      <mat-toolbar class="topbar telative topbar-background" style="background: #000000">
+        <!-- ============================================================== -->
+        <!-- sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="header_site_name">
+          <button mat-icon-button (click)="snav.toggle()" value="sidebarclosed">
+            <mat-icon class="header-icon">menu</mat-icon>
+          </button>
+<!--          <mat-label> LAFC </mat-label>-->
+        </div>
+        <!-- ============================================================== -->
+        <!-- app header component - style you can find in header.scss / header.component.ts-->
+        <!-- ============================================================== -->
+        <div class="header_search_call">
+          <div *ngIf="router.url === '/profile'">Profile</div>
+          <div *ngIf="router.url === '/cosmetologist'">Cosmetologist Management</div>
+          <div *ngIf="router.url === '/services'">Service Management</div>
+          <div *ngIf="router.url === '/client'">Client Management</div>
+          <div *ngIf="router.url === '/payout'">Payout Management</div>
+          <div *ngIf="router.url === '/transactionHistory'">Transaction History</div>
+          <div *ngIf="router.url === '/settings'">Settings</div>
+          <div *ngIf="router.url !== '/profile' && router.url !== '/cosmetologist' &&
+           router.url !== '/services' && router.url !== '/client' &&
+           router.url !== '/payout' && router.url !== '/transactionHistory' &&
+           router.url !== '/settings'">{{type}}</div>
+          <app-header></app-header>
+        </div>
+      </mat-toolbar>
+      <!-- ============================================================== -->
+      <!-- End Topbar - style you can find in pages.scss -->
+      <!-- ============================================================== -->
+    </mat-sidenav-content>
+    <!-- ============================================================== -->
+    <!-- Header container - style you can find in header.scss -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- Page container - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+
+    <mat-sidenav-content class="page-wrapper">
+
+      <div class="page-content" id="pageBodyContent">
+        <div id="ticketCom">
+          <!-- Main content -->
+          <section class="content">
+            <div id="tickets-cont-dev">
+        <router-outlet></router-outlet>
+            </div>
+          </section>
+        </div>
+        <app-footer></app-footer>
+      </div>
+    </mat-sidenav-content>
+    <!-- ============================================================== -->
+    <!-- Page container - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+  </mat-sidenav-container>
+
+</div>
+
