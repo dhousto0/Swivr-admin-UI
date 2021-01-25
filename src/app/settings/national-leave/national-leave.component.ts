@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { LeaveManagementService } from 'src/app/service/setting-service/leave-management.service';
+import { DialogNationalLeaveComponent } from './dialog-national-leave/dialog-national-leave.component';
 
 @Component({
   selector: 'app-national-leave',
@@ -24,11 +28,14 @@ export class NationalLeaveComponent implements OnInit {
   nationalId: any;
   
   constructor(public formBuilder: FormBuilder,
-    public leaveManagementService: LeaveManagementService) {
+    public leaveManagementService: LeaveManagementService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService,
+    public dialog: MatDialog) {
       this.columnTitle = ['National Holiday', 'Date', 'Action'];
       this.nationalLeaveForm = this.formBuilder.group({
         nationalLeaves: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])],
-        date: ['', Validators.required]
+        date: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])]
       });
      }
 
@@ -44,6 +51,7 @@ export class NationalLeaveComponent implements OnInit {
       this.pageSize = event.pageSize;
     }
     this.prevPageIndex = event.previousPageIndex;
+    
     this.getNationalHoliday(event.pageIndex, event.previousPageIndex);
   }
 
@@ -57,6 +65,7 @@ export class NationalLeaveComponent implements OnInit {
   }
 
   getNationalHoliday(count = 0, previousPageIndex = 0){
+    this.spinner.show();
 
     if (count === 0) {
       if (count <= previousPageIndex) {
@@ -73,10 +82,12 @@ export class NationalLeaveComponent implements OnInit {
         this.dataSource = res.list;
         this.rowCount = res.count;
       }
+      this.spinner.hide();
     });
   }
 
   addUpdateNationalLeave(){
+    this.spinner.show();
     if(this.isUpdate){
       let data = {
         id: this.nationalId,
@@ -88,33 +99,63 @@ export class NationalLeaveComponent implements OnInit {
       this.leaveManagementService.updateNationalHoliday(data).subscribe( (res: any) => {
         if(res.statusCode === 200){
           console.log(res);
+          this.toastr.success('', res.message);
+          this.nationalLeaveForm.patchValue({
+            nationalLeaves: '',
+            date: ''
+          });
           this.getNationalHoliday(0, 0);
         } else {
+          this.toastr.error('', res.message);
           console.log(res);
         }
+        this.spinner.hide();
       });
 
     } else {
       this.leaveManagementService.addNationalHoliday(this.nationalLeaveForm.value).subscribe( (res: any) => {
         if(res.statusCode === 201){
           console.log(res);
+          this.toastr.success('', res.message);
+          this.nationalLeaveForm.patchValue({
+            nationalLeaves: '',
+            date: ''
+          });
           this.getNationalHoliday(0, 0);
         } else {
+          this.toastr.error('', res.message);
           console.log(res);
-
         }
+        this.spinner.hide();
       });
     }
 
   }
 
-  deleteNationalLeave(id: number) {
-    this.leaveManagementService.removeNationalHoliday(id).subscribe((res: any) => {
-      if(res.statusCode === 200){
-        console.log(res);
-        this.getNationalHoliday(0, 0);
+  deleteNationalLeave(value: any) {
+
+    const dialogRef = this.dialog.open(DialogNationalLeaveComponent, {
+      width: "25vw",
+      height: "25vh",
+      data: { id: value.id, nationalLeaves: value.nationalLeaves}
+    });
+
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if(res){
+          this.spinner.show();
+          this.leaveManagementService.removeNationalHoliday(value.id).subscribe((data: any) => {
+          if(data.statusCode === 200){
+            this.toastr.success('', data.message);
+            this.getNationalHoliday(0, 0);
+
+          } else {
+            this.toastr.error('', data.message);
+            this.spinner.hide();
+          }
+        });
       }
-    })
+    });
 
   }
 

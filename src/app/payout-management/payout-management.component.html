@@ -3,7 +3,8 @@
 <div class="details" *ngIf="!isUpdate">
 
                 <form [formGroup]="payoutForm">
-                    <h3 class="title title-payout">Payout details <span><mat-icon class="create-icon" (click)="editUpdate()">create</mat-icon></span></h3>
+                    <h3 class="title title-payout">Payout details <span><mat-icon matTooltipPosition="below"  #tooltip="matTooltip"
+                      matTooltip="edit" class="create-icon" (click)="editUpdate()">create</mat-icon></span></h3>
                     <div class="line-height">
                       <div class="invLine"></div>
                       <div class="left-half">

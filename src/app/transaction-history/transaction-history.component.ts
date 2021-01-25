@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import {transactionHistoryService} from "../service/transaction-history.service";
 
 @Component({
@@ -18,11 +19,13 @@ export class TransactionHistoryComponent implements OnInit {
   pageSizeArray = [15, 50, 100];
   // private data:;
 
-  constructor(private transactionHistoryService: transactionHistoryService) {
+  constructor(private transactionHistoryService: transactionHistoryService,
+    private spinner: NgxSpinnerService) {
     this.columnTitle = ['Customer Profile', 'Customer Name', 'Transaction Id', 'Appointment Id', 'Cosmetologist Name', 'Message', 'Action'];
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.getTransactionHistory(this.limit, this.start)
   }
 
@@ -40,6 +43,8 @@ export class TransactionHistoryComponent implements OnInit {
       } else {
         this.dataSource = [];
       }
+      this.spinner.hide();
+
     });
   }
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import {UserServiceService} from '../service/user-service.service';
 
 @Component({
@@ -16,7 +18,9 @@ export class ProfileComponent implements OnInit {
   uploadedFiles: Array<File> = [] ;
 
   constructor(private fb: FormBuilder,
-              private userServiceService: UserServiceService) {
+              private userServiceService: UserServiceService,
+              private spinner: NgxSpinnerService,
+              private toastr: ToastrService) {
     this.profileForm = this.fb.group({
       userName: [],
       email: [],
@@ -26,6 +30,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.spinner.show();
     this.profileView();
     this.userId = localStorage.getItem('userId');
 
@@ -38,6 +43,8 @@ export class ProfileComponent implements OnInit {
         localStorage.setItem('fullName', this.profileDetails.fullName);
         localStorage.setItem('adminProfile', this.profileDetails.adminProfileUrl);
       }
+      this.spinner.hide();
+
     });
   }
 
@@ -46,6 +53,7 @@ export class ProfileComponent implements OnInit {
   }
 
   profileUpdate() {
+    this.spinner.show();
 
     if (this.uploadedFiles.length) {
       let formData = new FormData();
@@ -64,9 +72,18 @@ export class ProfileComponent implements OnInit {
           this.userServiceService.profileUpdate(data).subscribe((data: any) => {
             if (data.statusCode === 200) {
               this.isUpdate = false;
+              this.toastr.success('', data.message);
+
+              this.uploadedFiles = [];
               this.profileView();
+            } else {
+              this.toastr.error('', data.message);
+              this.spinner.hide();
             }
           });
+        } else {
+          this.toastr.error('', res.message);
+          this.spinner.hide();
         }
       });
     } else {
@@ -74,13 +91,19 @@ export class ProfileComponent implements OnInit {
         fullName: this.profileForm.value.fullName,
         email: this.profileForm.value.email,
         phone: this.profileForm.value.contact,
-        userName: this.profileForm.value.userName
+        userName: this.profileForm.value.userName,
+        adminProfile: this.profileDetails.adminProfile
       };
       this.userServiceService.profileUpdate(data).subscribe((data: any) => {
         if (data.statusCode === 200) {
           this.isUpdate = false;
+          this.toastr.success('', data.message);
           this.profileView();
+        } else {
+          this.toastr.error('', data.message);
+          this.spinner.hide();
         }
+
       });
     }
   }

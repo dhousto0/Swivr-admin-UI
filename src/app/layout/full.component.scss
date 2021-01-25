@@ -48,7 +48,9 @@
 
 .page-wrapper {
   width: calc(100% - 290px);
-  float: right;
+    height: calc(100vh - 66px);
+    float: right;
+    overflow: auto;
 }
 
 @media screen and (max-width: 765px) {

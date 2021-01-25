@@ -96,13 +96,15 @@
     margin-top:5%;
     font-size: 14px;
     border-radius: 50px;
+    text-align: right;
   }
   .field_label{
     display: block;
+    position: absolute;
     width: 100%;
     float: left;
-    padding: 0 0;
-    font-size: 12px;
+    padding: 19px 0;
+    font-size: 15px;
     color: #000000;
     font-weight: 500;
   }
@@ -157,7 +159,7 @@
   .policy-header-label{
     color:rgba(0, 0, 0, 0.87);
     font-weight:600;
-    font-size:1em;
+    font-size: 18px;
   }
   
   .policy-header-div{
@@ -208,9 +210,10 @@
   }
   .service-update {
     background: #4BD13D;
+    color: #fff;
   }
   .cancel-button {
-    margin: 17px;
+    margin-left: 15px;
     background: lightgray;
   }
   tr:nth-child(even) {

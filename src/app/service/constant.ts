@@ -27,6 +27,7 @@ export const API = {
   ADD_NATIONAL_HOLIDAY: API_ENDPOINT_URL + '/appointments/admin/addNationalHolidays',
   UPDATE_NATIONAL_HOLIDAY: API_ENDPOINT_URL + '/appointments/admin/updateNationalHolidays',
   REMOVE_NATIONAL_HOLIDAY: API_ENDPOINT_URL + '/appointments/admin/removeNationalHolidays',
-  NATIONAL_HOLIDAY_LIST: API_ENDPOINT_URL + '/appointments/admin/listNationalHolidays'
+  NATIONAL_HOLIDAY_LIST: API_ENDPOINT_URL + '/appointments/admin/listNationalHolidays',
+  DEFAULT_EMAIL_TEMPLATE: API_ENDPOINT_URL + '/admin/getDefaultEmailTemplate'
   
 };

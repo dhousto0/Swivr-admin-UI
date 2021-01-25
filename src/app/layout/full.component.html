@@ -64,7 +64,7 @@
            router.url !== '/services' && router.url !== '/client' &&
            router.url !== '/payout' && router.url !== '/transactionHistory' &&
            router.url !== '/settings'">{{type}}</div>
-          <app-header></app-header>
+          <app-header style="display: block;"></app-header>
         </div>
       </mat-toolbar>
       <!-- ============================================================== -->
@@ -83,10 +83,18 @@
 
       <div class="page-content" id="pageBodyContent">
         <div id="ticketCom">
+          <ngx-spinner
+          bdOpacity = 0.9
+          bdColor="rgba(51,51,51,0.8)"
+          size="large"
+          color="#4BD13D"
+          type="ball-scale-multiple"
+          [fullScreen] = "false">
+      </ngx-spinner>
           <!-- Main content -->
           <section class="content">
             <div id="tickets-cont-dev">
-        <router-outlet></router-outlet>
+              <router-outlet></router-outlet>
             </div>
           </section>
         </div>

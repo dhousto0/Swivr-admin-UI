@@ -1,19 +1,6 @@
 <div>
     <form class="md-float-material form-material" [formGroup]="emailTemplatesForm">
         <div class="container full-width">
-        <!-- <button mat-raised-button class="choose-template" [matMenuTriggerFor]="chooseTemplate">
-            <mat-icon>
-            <i class="fa fa-cogs"></i>
-            </mat-icon>
-            Choose Template
-            <mat-icon>keyboard_arrow_down</mat-icon>
-        </button> -->
-
-        <!-- <mat-menu #chooseTemplate="matMenu" style="padding: 0">
-            <ng-container *ngFor="let template of chooseTemplates">
-            <button mat-menu-item class="menu-font" (click)="showTemplateValues(template)">{{template}}</button>
-            </ng-container>
-        </mat-menu> -->
 
         <div class="field_group">
             <div class="row" *ngIf="templateList && templateList.length !== 0">
@@ -27,13 +14,15 @@
 
                 <div class="form-group form-default">
                     <mat-form-field class="example-full-width" appearance="outline" style="margin-top: 1.75em; width: 100%;">
-                        <input type="text" matInput placeholder="Email Template Type *" aria-label="Number" readonly [disabled]="isUpdate ? true : false"
-                                name="templatetype" formControlName="templatetype" required>
+                        <input type="text" matInput placeholder="Email Template Type *" aria-label="Number" *ngIf="!isUpdate"
+                                name="templatetype" formControlName="templatetype">
+                        <input type="text" matInput placeholder="Email Template Type *" aria-label="Number" *ngIf="isUpdate" readonly #toolTip="matTooltip"
+                        matTooltip="Email template type can't change" matTooltipPosition="left" name="templatetype" formControlName="templatetype">
                         <mat-label>Email Template Type</mat-label>
                     </mat-form-field>
                     <mat-form-field class="example-full-width" appearance="outline" style="width: 100%;">
                         <input type="text" matInput placeholder="Subject *" aria-label="Number"
-                                name="templateSubject" formControlName="templateSubject" required>
+                                name="templateSubject" formControlName="templateSubject">
                         <mat-label>Subject</mat-label>
                     </mat-form-field>
                 </div>
@@ -50,7 +39,7 @@
             <div class="col-md-12">
             <div class="btn-div pull-right">
                 <button mat-flat-button type="submit" color="primary" class="display edit-icon" (click)="saveTemplateSettings()">Save Changes</button>
-                <button mat-flat-button class="display cancel-button" (click)="cancel()">Cancel</button>
+                <button mat-flat-button class="display cancel-button" (click)="addTemplate()">Create</button>
                 <!-- [ngClass]="!permissionService.settingsEmailTemplates.edit ? 'disabledClass' : 'noDisabled'" -->
             </div>
             </div>

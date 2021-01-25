@@ -42,6 +42,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { EmailTemplateComponent } from './settings/email-template/email-template.component';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { NationalLeaveComponent } from './settings/national-leave/national-leave.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastrModule } from 'ngx-toastr';
+import { DialogComponent } from './service-management/dialog/dialog.component';
+import { DialogNationalLeaveComponent } from './settings/national-leave/dialog-national-leave/dialog-national-leave.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +62,9 @@ import { NationalLeaveComponent } from './settings/national-leave/national-leave
     SettingsComponent,
     PayoutManagementComponent,
     EmailTemplateComponent,
-    NationalLeaveComponent
+    NationalLeaveComponent,
+    DialogComponent,
+    DialogNationalLeaveComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +96,13 @@ import { NationalLeaveComponent } from './settings/national-leave/national-leave
     TreeTableModule,
     InfiniteScrollModule,
     MatGridListModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxSpinnerModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     {

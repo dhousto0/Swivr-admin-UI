@@ -3,6 +3,7 @@ import {CosmetologistServiceService} from '../../service/cosmetologist-service.s
 import {ActivatedRoute} from '@angular/router';
 import { TreeNode} from 'primeng/api/treenode';
 import {UserServiceService} from '../../service/user-service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-cosmetologist-details',
@@ -23,7 +24,9 @@ export class CosmetologistDetailsComponent implements OnInit {
 
   constructor(private cosmetologistServiceService: CosmetologistServiceService,
               private route: ActivatedRoute,
-              private userServiceService: UserServiceService) {
+              private userServiceService: UserServiceService,
+              private spinner: NgxSpinnerService) {
+    this.spinner.show();
     this.userServiceService.headerNameUpdate.next('Cosmetologist Management');
     this.route.params.subscribe(params => {
       this.userKey = params['id'];
@@ -49,6 +52,7 @@ export class CosmetologistDetailsComponent implements OnInit {
 
     this.getCosmetologistDetails();
     this.getAppointmentDetails(10, 0);
+    this.spinner.hide();
   }
 
   getCosmetologistDetails() {

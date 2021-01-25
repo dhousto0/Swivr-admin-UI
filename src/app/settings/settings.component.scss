@@ -31,15 +31,16 @@ p {
 }
 
 ::ng-deep .mat-tab-header .mat-tab-list .mat-tab-label.mat-tab-label-active {
-  background-color: #22b812;
+  background-color: #4BD13D;
   color: #fff;
+  opacity: 1 !important;
 }
 
 ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label {
-width: auto !important;
-font-size: 16px;
-font-family: Raleway, sans-serif;
-font-weight: bold;
+  width: auto !important;
+  font-size: 16px;
+  font-family: Raleway, sans-serif;
+  font-weight: bold;
 }
 
 ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {

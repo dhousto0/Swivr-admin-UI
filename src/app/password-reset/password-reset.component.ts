@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import {UserServiceService} from '../service/user-service.service';
 
 @Component({
@@ -12,7 +14,9 @@ export class PasswordResetComponent implements OnInit {
   passwordCheck = false;
 
   constructor(private fb: FormBuilder,
-              private userServiceService: UserServiceService) {
+              private userServiceService: UserServiceService,
+              private spinner: NgxSpinnerService,
+              private toastr: ToastrService) {
     this.userServiceService.headerNameUpdate.next('Profile');
     this.resetForm = this.fb.group({
       oldPassword: ['', Validators.required],
@@ -59,6 +63,7 @@ export class PasswordResetComponent implements OnInit {
       this.passwordCheck = true;
       return;
     } else {
+      this.spinner.show();
 
       this.passwordCheck = false;
       let data = {
@@ -68,9 +73,20 @@ export class PasswordResetComponent implements OnInit {
       this.userServiceService.resetPassword(data).subscribe((data: any) => {
         if (data.statusCode === 200) {
           console.log('done');
+          this.toastr.success('', data.message);
+        } else {
+          this.toastr.error('', data.message);
         }
+        this.spinner.hide();
       });
     }
+  }
+
+  cancel() {
+    this.resetForm.reset();
+    // this.resetForm.controls.oldPassword.setErrors(null);
+    // this.resetForm.controls.password.setErrors(null);
+    // this.resetForm.controls.confirmPassword.setErrors(null);
   }
 
 }

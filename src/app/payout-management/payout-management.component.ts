@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { UserServiceService } from '../service/user-service.service';
 
 @Component({
@@ -9,10 +11,12 @@ import { UserServiceService } from '../service/user-service.service';
 })
 export class PayoutManagementComponent implements OnInit {
 
-  public isUpdate = true;
+  public isUpdate = false;
   public payoutForm: FormGroup;
   public payoutDetails: any
-  constructor(private fb: FormBuilder, private userServiceService: UserServiceService) { 
+  constructor(private fb: FormBuilder, private userServiceService: UserServiceService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService) { 
     this.payoutForm = this.fb.group({
       payout: '',
       isPayout: '',
@@ -36,10 +40,12 @@ export class PayoutManagementComponent implements OnInit {
         this.payoutForm.reset();
         this.isUpdate = true;
       }
+      this.spinner.hide();
     });
   }
 
   onSubmit() {
+    this.spinner.show();
 
     let data = {
       payout: this.payoutForm.value.payout,
@@ -50,13 +56,21 @@ export class PayoutManagementComponent implements OnInit {
     }
 
     this.userServiceService.addUpdatePayout(data).subscribe((res: any) => {
-      if(res.statusCode === 200){
-        console.log(res);
-        this.isUpdate = false;
-        this.getPayoutDetails();
+      if(res){
+        if(res.statusCode === 200){
+          console.log(res);
+          this.isUpdate = false;
+          this.toastr.success('', res.message);
+          this.getPayoutDetails();
+        } else {
+          this.isUpdate = true;
+          this.toastr.error('', res.message);
+        }
       } else {
-        this.isUpdate = true;
+        this.toastr.error('', 'Something went wrong');
       }
+   
+      this.spinner.hide();
 
     });
 
@@ -74,6 +88,7 @@ export class PayoutManagementComponent implements OnInit {
   }
 
   cancel(){
+    this.spinner.show();
     this.getPayoutDetails();
   }
 

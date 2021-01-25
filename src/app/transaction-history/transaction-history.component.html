@@ -10,7 +10,7 @@
               <li class="list-group-item">
                 <div class="row">
                   <div class="col-md-1 image-UI">
-                    <img class="img-circle" src="{{activity.custProfileUrl}}">
+                    <img class="img-circle" src="{{activity.custProfileUrl}}" (error)="activity.custProfileUrl='/assets/img/user_profile.jpg'">
                   </div>
                 <div class="col-md-11">
                 <div class="content-split">
@@ -31,6 +31,10 @@
                 </div>
               </li>
             </ul>
-        </div></div>
+
+        </div>
+        <div *ngIf="dataSource.length === 0" style="text-align: center;"><span>No Data Found</span></div>
+
+    </div>
   </section>
 </div>

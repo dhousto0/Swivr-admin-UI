@@ -22,7 +22,7 @@
 }
 
 .cancel-button {
-  margin: 17px;
+  margin-left: 15px;
   background: lightgray;
 }
 
@@ -46,6 +46,7 @@
     margin-top: 0.2%;
     float: right;
     zoom: 0.85;
+    cursor: pointer;
 }
 
 .toggle-button > input[type="checkbox"] {

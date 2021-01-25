@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
+import { NgxSpinnerService } from 'ngx-spinner';
 import {ClientServiceService} from '../../service/client-service.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class ClientListComponent implements OnInit {
   event: any;
   pageSizeArray = [15, 50, 100];
 
-  constructor(private clientServiceService: ClientServiceService) {
+  constructor(private clientServiceService: ClientServiceService,
+    private spinner: NgxSpinnerService) {
     this.columnTitle = ['Client Profile', 'Client Name', 'Email', 'Phone', 'Action'];
   }
 
@@ -28,6 +30,7 @@ export class ClientListComponent implements OnInit {
 
   getClientList(count = 0, previousPageIndex = 0) {
 
+    this.spinner.show();
     if (count === 0) {
       if (count <= previousPageIndex) {
         this.start = 0;
@@ -43,6 +46,7 @@ export class ClientListComponent implements OnInit {
         this.dataSource.data = data.list;
         this.rowCount = data.count;
       }
+      this.spinner.hide();
     });
   }
 

@@ -3,6 +3,7 @@ import {MatTabGroup} from "@angular/material/tabs";
 import {MatTableDataSource} from "@angular/material/table";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ServiceManagementService} from "../service/service-management.service";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-settings',
@@ -25,7 +26,9 @@ export class SettingsComponent implements OnInit {
   private serviceId: any;
 
   constructor(public formBuilder: FormBuilder,
-              public serviceManagementService: ServiceManagementService) {
+              public serviceManagementService: ServiceManagementService,
+              private spinner: NgxSpinnerService) {
+                this.spinner.hide()
   }
 
 

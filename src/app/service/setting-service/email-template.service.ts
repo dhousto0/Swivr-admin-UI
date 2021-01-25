@@ -20,4 +20,8 @@ export class EmailTemplateService {
   deleteEmailTemplate(emailType: string) {
     return this.http.delete(API.DELETE_EMAIL_TEMPLATE + '?emailType=' + emailType);
   }
+
+  defaultEmailTemplate(){
+    return this.http.get(API.DEFAULT_EMAIL_TEMPLATE);
+  }
 }

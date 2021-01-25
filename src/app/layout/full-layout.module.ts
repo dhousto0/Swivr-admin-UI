@@ -19,6 +19,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RouterModule} from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -47,6 +48,7 @@ import { FooterComponent } from './footer/footer.component';
     MatSortModule,
     MatTooltipModule,
     RouterModule,
+    NgxSpinnerModule
   ],
   exports: [
     FullComponent

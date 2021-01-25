@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserServiceService} from '../service/user-service.service';
 import {ISubscription} from 'rxjs-compat/Subscription';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-full',
@@ -13,7 +14,8 @@ public type: string = '';
   private isUserLoggedSubscription: ISubscription;
 
   constructor(public router: Router,
-              private userServiceService: UserServiceService) {
+              private userServiceService: UserServiceService,
+              private spinner: NgxSpinnerService) {
     this.isUserLoggedSubscription = this.userServiceService.headerNameUpdate.subscribe((isUserLogged: string) => {
       this.type = '';
       this.type = isUserLogged;
@@ -29,6 +31,7 @@ public type: string = '';
   }
 
   navigateMenu(url: string) {
+    this.spinner.show();
     this.type = '';
     this.router.navigate([url]);
   }
