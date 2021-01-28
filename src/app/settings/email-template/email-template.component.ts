@@ -73,12 +73,12 @@ export class EmailTemplateComponent implements OnInit {
 
   saveTemplateSettings(){
 
-    if(this.emailTemplatesForm.valid){
+    if (this.emailTemplatesForm.valid){
       let data = {
         emailType: this.emailTemplatesForm.value.templatetype,
         subject: this.emailTemplatesForm.value.templateSubject,
         templateBody: this.emailTemplatesForm.value.emailTemplateBody
-      }
+      };
       this.emailTemplateService.updateEmailTemplate(data).subscribe( (res: any) => {
         if(res.statusCode === 200){
           this.getEmailTemplate();
@@ -88,8 +88,6 @@ export class EmailTemplateComponent implements OnInit {
 
       });
 
-    } else {
-      console.log("Form is not valid");
     }
   }
 
@@ -110,7 +108,6 @@ export class EmailTemplateComponent implements OnInit {
     // this.emailTemplatesForm.controls.templatetype.setErrors(null);
     // this.emailTemplatesForm.controls.templateSubject.updateValueAndValidity();
     // this.emailTemplatesForm.controls.emailTemplateBody.setErrors(null);
-    // console.log(this.emailTemplatesForm)
     this.isUpdate = false;
     this.getDefaultEmailTemplate();
   }

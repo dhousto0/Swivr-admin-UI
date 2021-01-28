@@ -32,8 +32,7 @@ export class PayoutManagementComponent implements OnInit {
     this.userServiceService.getPayoutDetails().subscribe((data: any) => {
       if (data.statusCode === 200) {
         this.isUpdate = false;
-        this.payoutDetails = data.data
-        console.log(data);
+        this.payoutDetails = data.data;
       } else {
         this.payoutForm.reset();
         this.isUpdate = true;
@@ -54,7 +53,6 @@ export class PayoutManagementComponent implements OnInit {
     this.userServiceService.addUpdatePayout(data).subscribe((res: any) => {
       if(res){
         if(res.statusCode === 200){
-          console.log(res);
           this.isUpdate = false;
           this.toastr.success('', res.message);
           this.getPayoutDetails();
@@ -86,8 +84,7 @@ export class PayoutManagementComponent implements OnInit {
   }
 
   toggleButtonPayout(event: any){
-    console.log(event);
-    if(this.payoutDetails.isPayout){
+    if (this.payoutDetails.isPayout){
       this.payoutForm.value.isPayout = false;
       this.payoutDetails.isPayout = false;
     } else {

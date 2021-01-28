@@ -114,8 +114,7 @@ export class ServiceManagementComponent implements OnInit {
                 }
               });
             } else {
-              console.log("image upload failed", res)
-              this.toastr.error('', res.message)
+              this.toastr.error('', res.message);
             }
           });
         } else {
@@ -163,10 +162,11 @@ export class ServiceManagementComponent implements OnInit {
             if (data.statusCode === 201) {
               this.serviceText = 'Create Service';
               this.serviceForm.reset();
-              this.toastr.success('', data.message)
+              this.toastr.success('', data.message);
               this.getServiceList(0, 0);
+            } else {
+              this.toastr.error('', data.message);
             }
-            this.toastr.error('', data.message)
           });
         }
 
@@ -193,7 +193,6 @@ export class ServiceManagementComponent implements OnInit {
       // serviceImage: data.serviceImageUrl
     });
     this.serviceForm.value.serviceImage = data.serviceImageUrl;
-    console.log(this.serviceForm);
   }
 
   serviceDelete(value: any) {

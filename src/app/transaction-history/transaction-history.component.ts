@@ -31,12 +31,9 @@ export class TransactionHistoryComponent implements OnInit {
       start : start,
       limit : limit
     };
-    console.log(data);
     this.transactionHistoryService.getTransactionHistory(data).subscribe((res: any) => {
       if (res.statusCode === 200) {
-        console.log(res)
         this.dataSource = this.dataSource.concat(res.transactionDetails);
-        console.log(this.dataSource);
       } else {
         this.dataSource = [];
       }

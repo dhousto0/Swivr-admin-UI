@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { LeaveManagementService } from 'src/app/service/setting-service/leave-management.service';
-import {DialogComponent} from "../../service-management/dialog/dialog.component";
+import {DialogComponent} from '../../service-management/dialog/dialog.component';
 
 @Component({
   selector: 'app-national-leave',
@@ -17,11 +17,11 @@ export class NationalLeaveComponent implements OnInit {
   nationalLeaveForm: FormGroup;
   @ViewChild('picker') picker: any;
   columnTitle: string[] | undefined;
-  rowCount: number = 0;
-  pageSize: number = 15;
+  rowCount = 0;
+  pageSize = 15;
   prevPageIndex: number | undefined = 0;
-  start: number = 0;
-  limit: number = 15;
+  start = 0;
+  limit = 15;
   event: any;
   pageSizeArray = [15, 50, 100];
   isUpdate = false;
@@ -29,9 +29,9 @@ export class NationalLeaveComponent implements OnInit {
   dateStartDate: any = { showDate: new Date() };
 
   constructor(public formBuilder: FormBuilder,
-    public leaveManagementService: LeaveManagementService,
-    private toastr: ToastrService,
-    public dialog: MatDialog) {
+              public leaveManagementService: LeaveManagementService,
+              private toastr: ToastrService,
+              public dialog: MatDialog) {
       this.columnTitle = ['National Holiday', 'Date', 'Action'];
       this.nationalLeaveForm = this.formBuilder.group({
         nationalLeaves: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])],
@@ -90,7 +90,7 @@ export class NationalLeaveComponent implements OnInit {
     } else {
 
       if (this.isUpdate) {
-        let data = {
+        const data = {
           id: this.nationalId,
           nationalLeaves: this.nationalLeaveForm.value.nationalLeaves,
           date: this.nationalLeaveForm.value.date
@@ -113,7 +113,6 @@ export class NationalLeaveComponent implements OnInit {
       } else {
         this.leaveManagementService.addNationalHoliday(this.nationalLeaveForm.value).subscribe((res: any) => {
           if (res.statusCode === 201) {
-            console.log(res);
             this.toastr.success('', res.message);
             this.nationalLeaveForm.patchValue({
               nationalLeaves: '',
@@ -132,16 +131,16 @@ export class NationalLeaveComponent implements OnInit {
   deleteNationalLeave(value: any) {
 
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: "35vw",
-      height: "30vh",
+      width: '35vw',
+      height: '30vh',
       data: { id: value.id, nationalLeaves: value.nationalLeaves}
     });
 
 
     dialogRef.afterClosed().subscribe((res: any) => {
-      if(res){
+      if (res){
           this.leaveManagementService.removeNationalHoliday(value.id).subscribe((data: any) => {
-          if(data.statusCode === 200){
+          if (data.statusCode === 200){
             this.toastr.success('', data.message);
             this.getNationalHoliday(0, 0);
 

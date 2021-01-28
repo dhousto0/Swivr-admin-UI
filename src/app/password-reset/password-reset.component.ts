@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import {UserServiceService} from '../service/user-service.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-password-reset',
@@ -14,7 +15,8 @@ export class PasswordResetComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private userServiceService: UserServiceService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private router: Router) {
     this.userServiceService.headerNameUpdate.next('Profile');
     this.resetForm = this.fb.group({
       oldPassword: ['', Validators.required],
@@ -69,7 +71,7 @@ export class PasswordResetComponent implements OnInit {
       };
       this.userServiceService.resetPassword(data).subscribe((data: any) => {
         if (data.statusCode === 200) {
-          console.log('done');
+          this.router.navigate(['/profile']);
           this.toastr.success('', data.message);
         } else {
           this.toastr.error('', data.message);

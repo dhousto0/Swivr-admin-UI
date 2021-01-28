@@ -38,7 +38,6 @@ export class ClientDetailsComponent implements OnInit {
         extraZero = '0';
         let hours = Math.ceil(offset / - 60) < 10 ? '0' + Math.ceil(offset / - 60) : Math.ceil(offset / - 60);
       this.timezone = '+' + hours + ':' + extraZero + (-offset % 60);
-      console.log(this.timezone, Math.ceil(offset / - 60), -offset % 60);
     } else {
       let extraZero = '';
       if (offset % 60 < 10)

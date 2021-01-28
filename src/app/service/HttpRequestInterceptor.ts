@@ -24,8 +24,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     //   this.router.navigate(['/login']);
     // }
     const token = localStorage.getItem('accessToken');
-    console.log(request)
-    if(token) {
+    if (token) {
       const reqh = request.clone({
         headers: request.headers.append(
           'Authorization', (token ? 'bearer ' + token : '')
