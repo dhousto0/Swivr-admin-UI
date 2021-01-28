@@ -20,7 +20,7 @@ export class DialogComponent implements OnInit {
   }
 
   deleteService(){
-    this.dialogRef.close(true)
+    this.dialogRef.close(true);
   }
 
   cancel() {

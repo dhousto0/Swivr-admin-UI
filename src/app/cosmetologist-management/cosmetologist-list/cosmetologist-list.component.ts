@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import { NgxSpinnerService } from 'ngx-spinner';
 import {CosmetologistServiceService} from '../../service/cosmetologist-service.service';
 
 @Component({
@@ -19,8 +18,7 @@ export class CosmetologistListComponent implements OnInit {
   event: any;
   pageSizeArray = [15, 50, 100];
 
-  constructor(private cosmetologistServiceService: CosmetologistServiceService,
-    private spinner: NgxSpinnerService) {
+  constructor(private cosmetologistServiceService: CosmetologistServiceService) {
     this.columnTitle = ['Cosmetologist Profile', 'Cosmetologist Name', 'Email', 'Phone', 'Shop name', 'Action'];
   }
 
@@ -30,7 +28,6 @@ export class CosmetologistListComponent implements OnInit {
 
   getCosmetologistList(count = 0, previousPageIndex = 0) {
 
-    this.spinner.show();
     if (count === 0) {
       if (count <= previousPageIndex) {
         this.start = 0;
@@ -46,7 +43,6 @@ export class CosmetologistListComponent implements OnInit {
         this.dataSource.data = data.list;
         this.rowCount = data.count;
       }
-      this.spinner.hide();
     });
   }
 

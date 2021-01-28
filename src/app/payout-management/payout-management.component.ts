@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { UserServiceService } from '../service/user-service.service';
 
@@ -13,10 +12,9 @@ export class PayoutManagementComponent implements OnInit {
 
   public isUpdate = false;
   public payoutForm: FormGroup;
-  public payoutDetails: any
+  public payoutDetails: any;
   constructor(private fb: FormBuilder, private userServiceService: UserServiceService,
-    private spinner: NgxSpinnerService,
-    private toastr: ToastrService) { 
+              private toastr: ToastrService) {
     this.payoutForm = this.fb.group({
       payout: '',
       isPayout: '',
@@ -40,12 +38,10 @@ export class PayoutManagementComponent implements OnInit {
         this.payoutForm.reset();
         this.isUpdate = true;
       }
-      this.spinner.hide();
     });
   }
 
   onSubmit() {
-    this.spinner.show();
 
     let data = {
       payout: this.payoutForm.value.payout,
@@ -69,8 +65,6 @@ export class PayoutManagementComponent implements OnInit {
       } else {
         this.toastr.error('', 'Something went wrong');
       }
-   
-      this.spinner.hide();
 
     });
 
@@ -88,7 +82,6 @@ export class PayoutManagementComponent implements OnInit {
   }
 
   cancel(){
-    this.spinner.show();
     this.getPayoutDetails();
   }
 

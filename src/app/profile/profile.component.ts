@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import {UserServiceService} from '../service/user-service.service';
 
@@ -19,7 +18,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private userServiceService: UserServiceService,
-              private spinner: NgxSpinnerService,
               private toastr: ToastrService) {
     this.profileForm = this.fb.group({
       userName: [],
@@ -30,7 +28,6 @@ export class ProfileComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.spinner.show();
     this.profileView();
     this.userId = localStorage.getItem('userId');
 
@@ -43,7 +40,6 @@ export class ProfileComponent implements OnInit {
         localStorage.setItem('fullName', this.profileDetails.fullName);
         localStorage.setItem('adminProfile', this.profileDetails.adminProfileUrl);
       }
-      this.spinner.hide();
 
     });
   }
@@ -53,7 +49,6 @@ export class ProfileComponent implements OnInit {
   }
 
   profileUpdate() {
-    this.spinner.show();
 
     if (this.uploadedFiles.length) {
       let formData = new FormData();
@@ -78,12 +73,10 @@ export class ProfileComponent implements OnInit {
               this.profileView();
             } else {
               this.toastr.error('', data.message);
-              this.spinner.hide();
             }
           });
         } else {
           this.toastr.error('', res.message);
-          this.spinner.hide();
         }
       });
     } else {
@@ -101,7 +94,6 @@ export class ProfileComponent implements OnInit {
           this.profileView();
         } else {
           this.toastr.error('', data.message);
-          this.spinner.hide();
         }
 
       });

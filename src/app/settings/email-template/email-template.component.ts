@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { EmailTemplateService } from 'src/app/service/setting-service/email-template.service';
 
 @Component({
@@ -14,15 +13,14 @@ export class EmailTemplateComponent implements OnInit {
   ckeConfig: any;
   templateList: any[] = [];
   isUpdate: boolean = false;
+  selectedTemplate: any;
 
-  constructor(private fb: FormBuilder, private emailTemplateService: EmailTemplateService,
-    private spinner: NgxSpinnerService) { 
+  constructor(private fb: FormBuilder, private emailTemplateService: EmailTemplateService) {
     this.emailTemplatesForm = this.fb.group({
       templatetype: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])],
       templateSubject: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])],
       emailTemplateBody: ['']
     });
-    this.spinner.show();
     this.getCkEditorConfig();
     this.getEmailTemplate();
   }
@@ -56,9 +54,9 @@ export class EmailTemplateComponent implements OnInit {
   getEmailTemplate(){
     this.emailTemplateService.getEmailTemplate().subscribe( (res: any) => {
       if(res.statuscode === 200){
-        console.log(res.list);
         this.templateList = res.list;
         if(!this.isUpdate){
+          this.selectedTemplate = res.list[0];
           this.emailTemplatesForm.patchValue({
             templatetype: res.list[0].emailType,
             templateSubject: res.list[0].subject,
@@ -69,13 +67,11 @@ export class EmailTemplateComponent implements OnInit {
       } else {
         this.templateList = [];
       }
-    this.spinner.hide();
 
     });
   }
 
   saveTemplateSettings(){
-    this.spinner.show();
 
     if(this.emailTemplatesForm.valid){
       let data = {
@@ -89,17 +85,16 @@ export class EmailTemplateComponent implements OnInit {
         } else {
           this.templateList = [];
         }
-        this.spinner.hide();
 
-      })
+      });
 
     } else {
       console.log("Form is not valid");
-      this.spinner.hide();
     }
   }
 
   getTemplate(data: any) {
+    this.selectedTemplate = data;
     this.isUpdate = true;
 
     this.emailTemplatesForm.patchValue({

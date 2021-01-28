@@ -45,7 +45,8 @@ import { NationalLeaveComponent } from './settings/national-leave/national-leave
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { DialogComponent } from './service-management/dialog/dialog.component';
-import { DialogNationalLeaveComponent } from './settings/national-leave/dialog-national-leave/dialog-national-leave.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -63,8 +64,7 @@ import { DialogNationalLeaveComponent } from './settings/national-leave/dialog-n
     PayoutManagementComponent,
     EmailTemplateComponent,
     NationalLeaveComponent,
-    DialogComponent,
-    DialogNationalLeaveComponent
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +98,8 @@ import { DialogNationalLeaveComponent } from './settings/national-leave/dialog-n
     MatGridListModule,
     CKEditorModule,
     NgxSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-right',

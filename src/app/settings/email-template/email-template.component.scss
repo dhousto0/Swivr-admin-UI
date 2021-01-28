@@ -17,7 +17,7 @@
     margin: 0px 5px 5px;
     margin-top: 12px;
   }
-  
+
   .btn-group1 button:active {
     color: #333 !important;
     text-decoration: none !important;
@@ -44,6 +44,10 @@
   user-select: none;
 }
 
+.create-btn {
+  float: right;
+  margin-right: 22px !important;
+}
 .cancel-button {
   margin-left: 15px;
   // background: #cc2251de;

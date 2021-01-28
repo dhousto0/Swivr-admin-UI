@@ -9,8 +9,9 @@ import {CosmetologistDetailsComponent} from './cosmetologist-management/cosmetol
 import {TransactionHistoryComponent} from './transaction-history/transaction-history.component';
 import {ClientListComponent} from './client-management/client-list/client-list.component';
 import {ClientDetailsComponent} from './client-management/client-details/client-details.component';
-import {SettingsComponent} from "./settings/settings.component";
+import {SettingsComponent} from './settings/settings.component';
 import { PayoutManagementComponent } from './payout-management/payout-management.component';
+import {AuthGuard} from './service/app.authGuard.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},

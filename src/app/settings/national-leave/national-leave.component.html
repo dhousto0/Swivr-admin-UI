@@ -43,10 +43,9 @@
     </div>
     <div class="col-sm-6">
       <mat-card>
-        <div class="field-div">
           <div class="row">
             <div class="col-sm-10 policy-header-div">
-              <mat-label class="policy-header-label">Add Holidays</mat-label>
+              <mat-label class="policy-header-label">Add Holiday</mat-label>
             </div>
           </div>
           <hr class="hr-class">
@@ -55,14 +54,14 @@
               <div class="row div-row-form">
 
                 <div class="col-sm-4 roles-col-size">
-                    <label class="field_label">National Holiday Date</label>
+                    <label class="field_label">National Holiday</label>
                 </div>
                 <div class="col-sm-8 form-col-size">
                     <div class="row div-row-form">
                       <div class="col-sm-12">
                         <mat-form-field class="example-full-width w-100" appearance="outline">
-                          <mat-label>Date</mat-label>
-                          <input name="date" matInput type="text" placeholder="Date" formControlName="date" required>
+                          <mat-label>Holiday Name</mat-label>
+                          <input name="nationalLeaves" matInput type="text" placeholder="Holiday Name" formControlName="nationalLeaves" required>
                         </mat-form-field>
                       </div>
                     </div>
@@ -70,33 +69,37 @@
               </div>
               <div class="row div-row-form">
                 <div class="col-sm-4 roles-col-size">
-                  <label class="field_label">National Holiday</label>
+                  <label class="field_label">National Holiday Date</label>
                 </div>
                 <div class="col-sm-8 form-col-size">
                   <div class="row div-row-form">
                     <div class="col-sm-12">
                       <mat-form-field class="example-full-width w-100" appearance="outline">
-                        <mat-label>Holiday Name</mat-label>
-                        <input name="nationalLeaves" matInput type="text" placeholder="Holiday Name" formControlName="nationalLeaves" required>
+                        <mat-label>Holiday Date</mat-label>
+
+                        <input required date="true" [(ngModel)]="dateStartDate.showDate"
+                               matInput formControlName="date" [matDatepicker]="picker" (focus)="picker.open()"
+                               name="date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-8 div-col-createRole">
-                      <button *ngIf="!isUpdate" name="submitBtn" mat-button class="service-update" type="submit" (click)="addUpdateNationalLeave()">Save</button>
+                      <button *ngIf="!isUpdate" name="submitBtn" mat-button class="service-update" type="submit" (click)="addUpdateNationalLeave()">Add</button>
                       <button *ngIf="isUpdate" name="submitBtn" mat-button class="service-update" type="submit" (click)="addUpdateNationalLeave()">Update</button>
                       <button mat-button class="btn cancel-button" (click)="cancel()">Cancel</button>
                     </div>
                  </div>
                 </div>
 
-          
-               
+
+
               </div>
             </div>
           </form>
-        </div>
       </mat-card>
     </div>
   </div>

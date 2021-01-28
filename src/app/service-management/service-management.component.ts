@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import {ServiceManagementService} from '../service/service-management.service';
 import { UserServiceService } from '../service/user-service.service';
@@ -34,19 +33,17 @@ export class ServiceManagementComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
               public serviceManagementService: ServiceManagementService,
               public userServiceService: UserServiceService,
-              private spinner: NgxSpinnerService,
               private toastr: ToastrService,
               public dialog: MatDialog) {
     this.columnTitle = ['Service Image', 'Service Name', 'Action'];
     this.serviceForm = this.formBuilder.group({
-      serviceName: '',
-      serviceImage: ''
+      serviceName: ['', Validators.required],
+      serviceImage: ['']
     });
   }
 
   ngOnInit() {
     this.serviceText = 'Create Service';
-    this.spinner.show();
     this.getServiceList(0, 0);
   }
 
@@ -70,12 +67,8 @@ export class ServiceManagementComponent implements OnInit {
     this.serviceManagementService.serviceList().subscribe((data: any) => {
       if (data.statusCode === 200) {
         this.servicesList = data.list;
-        console.log(this.servicesList)
         this.dataSource.data = data.list;
         this.rowCount = data.list.length;
-        this.spinner.hide();
-      } else {
-        this.spinner.hide();
       }
     });
   }
@@ -92,93 +85,91 @@ export class ServiceManagementComponent implements OnInit {
   }
 
   addUpdateService() {
-    this.spinner.show();
-
-    console.log(this.serviceForm)
-    if (this.isUpdate) {
-      let data = {
-        id: this.serviceId,
-        serviceName: this.serviceForm.value.serviceName,
-        serviceImageUrl: this.serviceForm.value.serviceImage
-      };
-      if (this.uploadedFiles.length) {
-        let formData = new FormData();
-        for (var i = 0; i < this.uploadedFiles.length; i++) {
-          formData.append("file", this.uploadedFiles[i], this.uploadedFiles[i].name);
-        }
-        this.userServiceService.imageUpload('SERVICES', formData).subscribe((res: any) => {
-          if (res.statusCode === 200) {
-            data.serviceImageUrl = res.url;
-            this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
-              if (data.statusCode === 200) {
-                this.serviceText = 'Create Service';
-                this.serviceForm.reset();
-                this.getServiceList(0, 0);
-                this.toastr.success('', data.message)
-              } else {
-                this.spinner.hide();
-                this.toastr.error('', data.message)
-              }
-            });
-          } else {
-            console.log("image upload failed", res)
-            this.toastr.error('', res.message)
-          }
-        });
-      } else {
-        this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
-          if (data.statusCode === 200) {
-            this.serviceText = 'Create Service';
-            this.serviceForm.reset();
-            this.getServiceList(0, 0);
-            this.toastr.success('', data.message)
-          } else {
-            this.spinner.hide();
-            this.toastr.error('', data.message)
-          }
-        });
-      }
+    if(this.serviceForm.invalid) {
+      return;
     } else {
-      let data = {
-        serviceName: this.serviceForm.value.serviceName,
-        serviceImageUrl: this.serviceForm.value.serviceImage
-      };
-      if (this.uploadedFiles.length) {
-        let formData = new FormData();
-        for (var i = 0; i < this.uploadedFiles.length; i++) {
-          formData.append("file", this.uploadedFiles[i], this.uploadedFiles[i].name);
+
+      if (this.isUpdate) {
+        let data = {
+          id: this.serviceId,
+          serviceName: this.serviceForm.value.serviceName,
+          serviceImageUrl: this.serviceForm.value.serviceImage
+        };
+        if (this.uploadedFiles.length) {
+          let formData = new FormData();
+          for (var i = 0; i < this.uploadedFiles.length; i++) {
+            formData.append("file", this.uploadedFiles[i], this.uploadedFiles[i].name);
+          }
+          this.userServiceService.imageUpload('SERVICES', formData).subscribe((res: any) => {
+            if (res.statusCode === 200) {
+              data.serviceImageUrl = res.url;
+              this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
+                if (data.statusCode === 200) {
+                  this.serviceText = 'Create Service';
+                  this.serviceForm.reset();
+                  this.getServiceList(0, 0);
+                  this.toastr.success('', data.message)
+                } else {
+                  this.toastr.error('', data.message)
+                }
+              });
+            } else {
+              console.log("image upload failed", res)
+              this.toastr.error('', res.message)
+            }
+          });
+        } else {
+          this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
+            if (data.statusCode === 200) {
+              this.serviceText = 'Create Service';
+              this.serviceForm.reset();
+              this.getServiceList(0, 0);
+              this.toastr.success('', data.message)
+            } else {
+              this.toastr.error('', data.message)
+            }
+          });
         }
-        this.userServiceService.imageUpload('SERVICES', formData).subscribe((res: any) => {
-          if (res.statusCode === 200) {
-            data.serviceImageUrl = res.url;
-            this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
-              if (data.statusCode === 201) {
-                this.serviceText = 'Create Service';
-                this.serviceForm.reset();
-                this.toastr.success('', data.message)
-                this.getServiceList(0, 0);
-              } else {
-                this.spinner.hide();
-                this.toastr.error('', data.message);
-              }
-            });
-          } else {
-            this.spinner.hide();
-            this.toastr.error('', res.message);
-          }
-          
-        });
       } else {
-        this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
-          if (data.statusCode === 201) {
-            this.serviceText = 'Create Service';
-            this.serviceForm.reset();
-            this.toastr.success('', data.message)
-            this.getServiceList(0, 0);
+        let data = {
+          serviceName: this.serviceForm.value.serviceName,
+          serviceImageUrl: this.serviceForm.value.serviceImage
+        };
+        if (this.uploadedFiles.length) {
+          let formData = new FormData();
+          for (var i = 0; i < this.uploadedFiles.length; i++) {
+            formData.append("file", this.uploadedFiles[i], this.uploadedFiles[i].name);
           }
-          this.spinner.hide();
-          this.toastr.error('', data.message)
-        });
+          this.userServiceService.imageUpload('SERVICES', formData).subscribe((res: any) => {
+            if (res.statusCode === 200) {
+              data.serviceImageUrl = res.url;
+              this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
+                if (data.statusCode === 201) {
+                  this.serviceText = 'Create Service';
+                  this.serviceForm.reset();
+                  this.toastr.success('', data.message)
+                  this.getServiceList(0, 0);
+                } else {
+                  this.toastr.error('', data.message);
+                }
+              });
+            } else {
+              this.toastr.error('', res.message);
+            }
+
+          });
+        } else {
+          this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
+            if (data.statusCode === 201) {
+              this.serviceText = 'Create Service';
+              this.serviceForm.reset();
+              this.toastr.success('', data.message)
+              this.getServiceList(0, 0);
+            }
+            this.toastr.error('', data.message)
+          });
+        }
+
       }
     }
 
@@ -207,26 +198,24 @@ export class ServiceManagementComponent implements OnInit {
 
   serviceDelete(value: any) {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: "25vw",
-      height: "25vh",
+      width: "35vw",
+      height: "30vh",
       data: { serviceId: value.id, serviceName: value.serviceName}
     });
 
     dialogRef.afterClosed().subscribe((res: any) => {
       if(res){
-          this.spinner.show();
           this.serviceManagementService.serviceDelete(value.id).subscribe((data: any) => {
           if(data.statusCode === 200){
             this.toastr.success('', data.message);
             this.getServiceList(0, 0);
           } else {
             this.toastr.error('', data.Message);
-            this.spinner.hide();
           }
         });
       }
     });
- 
+
   }
 
   fileChange(element: any) {

@@ -6,6 +6,7 @@
             <div class="row" *ngIf="templateList && templateList.length !== 0">
                 <div class="btn-group1">
                     <button class="btn" *ngFor="let template of templateList" (click)="getTemplate(template)">{{template?.emailType}}</button>
+                    <button class="btn create-btn" (click)="addTemplate()"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
                 </div>
             </div>
             <div class="row">
@@ -17,7 +18,7 @@
                         <input type="text" matInput placeholder="Email Template Type *" aria-label="Number" *ngIf="!isUpdate"
                                 name="templatetype" formControlName="templatetype">
                         <input type="text" matInput placeholder="Email Template Type *" aria-label="Number" *ngIf="isUpdate" readonly #toolTip="matTooltip"
-                        matTooltip="Email template type can't change" matTooltipPosition="left" name="templatetype" formControlName="templatetype">
+                        matTooltip="Email template type cannot be changed" matTooltipPosition="before" name="templatetype" formControlName="templatetype">
                         <mat-label>Email Template Type</mat-label>
                     </mat-form-field>
                     <mat-form-field class="example-full-width" appearance="outline" style="width: 100%;">
@@ -39,7 +40,7 @@
             <div class="col-md-12">
             <div class="btn-div pull-right">
                 <button mat-flat-button type="submit" color="primary" class="display edit-icon" (click)="saveTemplateSettings()">Save Changes</button>
-                <button mat-flat-button class="display cancel-button" (click)="addTemplate()">Create</button>
+                <button mat-flat-button class="display cancel-button" (click)="getTemplate(selectedTemplate)">Cancel</button>
                 <!-- [ngClass]="!permissionService.settingsEmailTemplates.edit ? 'disabledClass' : 'noDisabled'" -->
             </div>
             </div>

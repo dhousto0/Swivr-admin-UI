@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import {UserServiceService} from '../service/user-service.service';
 
@@ -19,7 +18,6 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private userServiceService: UserServiceService,
               private router: Router,
-              private spinner: NgxSpinnerService,
               private toastr: ToastrService) {
     this.loginForm = this.fb.group({
       username: [''],
@@ -28,6 +26,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem('accessToken')) {
+      this.router.navigate(['services']);
+    }
     let offset = new Date().getTimezoneOffset();
 
     if (offset < 0) {
@@ -45,10 +46,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.spinner.show();
     if(!this.loginForm.value.username || !this.loginForm.value.password) {
       this.errorClose = true;
-      this.spinner.hide();
     } else {
       var data = {
         userName: this.loginForm.value.username,
@@ -58,7 +57,6 @@ export class LoginComponent implements OnInit {
       this.userServiceService.login(data).subscribe((data: any) => {
         if (data.statusCode === 200) {
           this.toastr.success('', data.message);
-          this.spinner.hide();
           this.userServiceService.updateIsUserLogged.next(true);
           localStorage.setItem('accessToken', data.accessToken);
           localStorage.setItem('fullName', data.admin.fullName);
@@ -68,7 +66,6 @@ export class LoginComponent implements OnInit {
           });
         } else {
           this.toastr.error('', data.message);
-          this.spinner.hide();
         }
       });
     }
