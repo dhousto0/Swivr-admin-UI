@@ -4,6 +4,7 @@
 
 .side-header {
   text-align: center;
+  padding-bottom: 28px;
 }
 .side-header-name {
   font-size: 25px;
@@ -23,16 +24,19 @@
 
   .login-box{
     box-shadow: 1px 1.732px 3px 0 #dcdcdc;
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: #000;
-    padding: 35px 20px 60px;
+    padding: 50px 20px;
+    // padding: 35px 20px 60px;
     border: 1px solid #dcdcdc;
+    position: relative;
   }
 }
 
 .main-online-order{
   background: white;
-  padding: 7pc;
+  // padding: 7pc;
+  padding: 5vh 5vw;
   .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary,
   .mat-flat-button.mat-primary a{
     color: #fff;

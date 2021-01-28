@@ -61,11 +61,11 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('accessToken', data.accessToken);
           localStorage.setItem('fullName', data.admin.fullName);
           localStorage.setItem('adminProfile', data.admin.adminProfile);
-          this.router.navigate(['/services']) .then(() => {
+          this.router.navigate(['/services']).then(() => {
             window.location.reload();
           });
         } else {
-          this.toastr.error('', data.message);
+          this.toastr.error('', data.message ? data.message : 'Something went wrong');
         }
       });
     }

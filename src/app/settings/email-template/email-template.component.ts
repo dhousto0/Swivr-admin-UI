@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { EmailTemplateService } from 'src/app/service/setting-service/email-template.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class EmailTemplateComponent implements OnInit {
   isUpdate: boolean = false;
   selectedTemplate: any;
 
-  constructor(private fb: FormBuilder, private emailTemplateService: EmailTemplateService) {
+  constructor(private fb: FormBuilder, private emailTemplateService: EmailTemplateService,
+    private toaster: ToastrService) { 
     this.emailTemplatesForm = this.fb.group({
       templatetype: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])],
       templateSubject: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])],
@@ -81,8 +83,10 @@ export class EmailTemplateComponent implements OnInit {
       };
       this.emailTemplateService.updateEmailTemplate(data).subscribe( (res: any) => {
         if(res.statusCode === 200){
+          this.toaster.success('', res.message);
           this.getEmailTemplate();
         } else {
+          this.toaster.error('', res.message ? res.message : 'Something Went Wrong');
           this.templateList = [];
         }
 

@@ -7,13 +7,15 @@
         size="medium"
         color="#4BD13D"
         type="ball-scale-multiple"
+        [fullScreen] = "true"
       ></ngx-spinner>
 
         <div class="side-header">
           <img class="logo-image" src="assets/img/logo.png">
           <div class="side-header-name">SWIVR</div>
         </div>
-        <form novalidate [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="background: white">
+        <form novalidate [formGroup]="loginForm" style="background: white;     padding: 42px 0px;
+        border-radius: 20px;">
 
 
           <div class="label-width">
@@ -30,7 +32,7 @@
             </mat-form-field>
           </div>
           <div class="login-submit label-width">
-            <button type="submit" mat-flat-button color="primary" class="w-100" (click)="onSubmit()">Sign In</button>
+            <button mat-flat-button color="primary" class="w-100" (click)="onSubmit()">Sign In</button>
           </div>
 
         </form>

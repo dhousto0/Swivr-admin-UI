@@ -162,6 +162,7 @@
 #ticketCom {
   background: white;
   font-family: Raleway, sans-serif;
+  position: relative;
 }
 #tickets-cont-dev {
   background: white;
@@ -177,3 +178,6 @@
   background: #f2f3f5;
   padding: 15px;
 }
+
+// .myspinner 
+.black-overlay{ position: fixed !important; }
