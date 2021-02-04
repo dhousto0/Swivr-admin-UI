@@ -37,7 +37,7 @@ export class ServiceManagementComponent implements OnInit {
               public dialog: MatDialog) {
     this.columnTitle = ['Service Image', 'Service Name', 'Action'];
     this.serviceForm = this.formBuilder.group({
-      serviceName: ['', Validators.required],
+      serviceName: [''],
       serviceImage: ['']
     });
   }
@@ -85,9 +85,17 @@ export class ServiceManagementComponent implements OnInit {
   }
 
   addUpdateService() {
-    if(this.serviceForm.invalid) {
+    if(this.serviceForm.value.serviceName === '' || this.serviceForm.value.serviceName === null){
+      this.serviceForm.controls.serviceName.setErrors({'incorrect': true})
       return;
-    } else {
+    }
+    if(this.profileUrl === ''){
+      this.serviceForm.controls.serviceImage.setErrors({'incorrect': true})
+      return;
+    }
+    // if(this.serviceForm.invalid) {
+    //   return;
+    // } else {
 
       if (this.isUpdate) {
         let data = {
@@ -102,9 +110,11 @@ export class ServiceManagementComponent implements OnInit {
           }
           this.userServiceService.imageUpload('SERVICES', formData).subscribe((res: any) => {
             if (res.statusCode === 200) {
+              console.log(res.url, res);
               data.serviceImageUrl = res.url;
               this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
                 if (data.statusCode === 200) {
+                  this.profileUrl = '';
                   this.serviceText = 'Create Service';
                   this.serviceForm.reset();
                   this.getServiceList(0, 0);
@@ -122,6 +132,7 @@ export class ServiceManagementComponent implements OnInit {
             if (data.statusCode === 200) {
               this.serviceText = 'Create Service';
               this.serviceForm.reset();
+              this.profileUrl = '';
               this.getServiceList(0, 0);
               this.toastr.success('', data.message)
             } else {
@@ -171,12 +182,14 @@ export class ServiceManagementComponent implements OnInit {
         }
 
       }
-    }
+    // }
 
   }
 
 
   cancel() {
+    this.profileUrl = '';
+    this.serviceForm.controls.serviceName.setErrors(null)
     this.serviceText = 'Create Service';
     this.serviceId = 0;
     this.isUpdate = false;
@@ -223,5 +236,20 @@ export class ServiceManagementComponent implements OnInit {
 
   setDefaultPic() {
       this.profileUrl = '/assets/img/user_profile.jpg';
+  }
+
+  chooseImage() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: "50vw",
+      height: "70vh",
+      data: { type: 'service'}
+    });
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if(res){
+        this.profileUrl = res.imageUrl;
+          console.log(res);
+      }
+    });
   }
 }

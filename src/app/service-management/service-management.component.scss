@@ -175,6 +175,7 @@ td:first-child, th:first-child {
 .width-roleName {
   width: 200px;
   word-wrap: break-word;
+  height: 40% !important;
 }
 
 .form-button-40{
@@ -225,7 +226,8 @@ tr:nth-child(even) {
   padding: 10px;
   border-radius: 50%;
   margin: 5px;
-  width: 38%!important;
+  width: 40%!important;
+  height: 40% !important;
 }
 
 .w-profile {
@@ -237,4 +239,9 @@ tr:nth-child(even) {
 
 .letter {
   font-family: Raleway, sans-serif;
+}
+
+.choose-button {
+  background: #d3d3d3a1;
+  font-size: 16px;
 }

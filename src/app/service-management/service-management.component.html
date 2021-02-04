@@ -8,7 +8,7 @@
           <td mat-cell *matCellDef="let data" class="mat-cell-size">
             <a style="cursor: pointer">
               <div class="width-roleName">
-                <img class="w-50 service-profile" src="{{data.profileUrl}}">
+                <img class="w-50 service-profile" src="{{data.profileUrl ? data.profileUrl : '/assets/img/user_profile.jpg'}}">
               </div>
             </a>
           </td>
@@ -31,7 +31,7 @@
             </a>
             <a class="btn btn-sm btn-action">
               <div class="ripple">
-                <button class="btn btn-assigned" (click)="serviceDelete(data)">
+                <button class="btn btn-assigned" matTooltip="Delete" (click)="serviceDelete(data)">
                   <i class="fas fa-trash-alt delete-icon"></i>
                 </button>
               </div>
@@ -65,10 +65,20 @@
                   <div class="col-sm-12">
                     <mat-form-field class="example-full-width w-100" appearance="outline">
                       <mat-label class="letter">Service Name</mat-label>
-                      <input name="serviceName" class="letter" matInput type="text" placeholder="Service Name" formControlName="serviceName" required>
+                      <input name="serviceName" class="letter" matInput type="text" placeholder="Service Name" formControlName="serviceName" maxLength="100">
                     </mat-form-field>
                   </div>
                 </div>
+           
+              </div>
+
+            </div>
+
+            <div class="row div-row-form">
+              <div class="col-sm-4 roles-col-size">
+                <mat-label class="field_label" style="padding-top: 7px;">Service Imgae</mat-label>
+              </div>
+              <div class="col-sm-8 form-col-size">
                 <div class="row div-row-form" *ngIf="profileUrl !== ''">
                   <div class="col-sm-12">
                     <div class="fileinput-new thumbnail" style="width: 150px;">
@@ -78,23 +88,22 @@
                 </div>
                 <div class="row div-row-form">
                   <div class="col-sm-12">
-                    <div class="btn btn-default btn-file">
+                    <button mat-button class="btn choose-button letter" (click)="chooseImage()">Choose Image</button>
+                    <!-- <div class="btn btn-default btn-file">
                         <span class="fileinput-new">
                           <input type="hidden" value="" name="">
                            <input #inputFile class="input-file letter" type="file" id="myFiles" accept=".svg, .jpg, .jpeg, .png" (change)="fileChange($event)">
                        </span>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <div class="row">
-                  <!-- <div class="col-sm-4"></div> -->
                   <div class="col-sm-12 div-col-createRole">
                     <button name="submitBtn" mat-button class="service-update letter" type="submit" (click)="addUpdateService()">{{serviceText}}</button>
                     <button mat-button class="btn cancel-button letter" (click)="cancel()">Cancel</button>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </form>

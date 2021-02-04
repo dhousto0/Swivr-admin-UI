@@ -24,4 +24,8 @@ export class ServiceManagementService {
   serviceDelete(serviceId: number){
     return this.http.delete(API.SERVICE_DELETE + '?serviceId=' + serviceId);
   }
+
+  serviceImageList(){
+    return this.http.get(API.SERVICE_IMAGES_LIST);
+  }
 }

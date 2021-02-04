@@ -1,4 +1,4 @@
-<div class="update-button">
+<div class="update-button" *ngIf="data?.type !== 'service'">
 
     <h3>You are about to delete a record. This cannot be undone. Are you sure?</h3>
 
@@ -10,3 +10,26 @@
                 class="display cancel-button" (click)="cancel()">Cancel</button>
       </div>
 </div>
+
+<div class="" *ngIf="data?.type === 'service'">
+
+        <h3 class='update-button'>Service Images</h3>
+        <div class="col-sm-12 row image-div">
+                               
+                                <div class="col-sm-3" *ngFor="let image of serviceImageLists">
+                                        <mat-card class="fileinput-new thumbnail panel-custom detail_section clearfix" [ngClass]="image?.isSelected === true ? 'select-image' : 'error-image'" style="width: 150px;" (click)="chooseImage(image)">
+                                        <!-- <div > -->
+                                                <img class="w-profile" src="{{image.imageUrl}}" (error)="setDefaultPic()">
+                                        <!-- </div> -->
+                                        </mat-card>
+                                </div>
+        </div>
+
+        <div style="text-align: end;">
+            <button mat-flat-button
+                    class="display edit-icon" (click)="addImage()">Add</button>
+    
+            <button mat-flat-button
+                    class="display cancel-button" (click)="cancel()">Cancel</button>
+          </div>
+    </div>
