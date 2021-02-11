@@ -86,11 +86,11 @@ export class ServiceManagementComponent implements OnInit {
 
   addUpdateService() {
     if(this.serviceForm.value.serviceName === '' || this.serviceForm.value.serviceName === null){
-      this.serviceForm.controls.serviceName.setErrors({'incorrect': true})
+      this.serviceForm.controls.serviceName.setErrors({'incorrect': true});
       return;
     }
     if(this.profileUrl === ''){
-      this.serviceForm.controls.serviceImage.setErrors({'incorrect': true})
+      this.serviceForm.controls.serviceImage.setErrors({'incorrect': true});
       return;
     }
     // if(this.serviceForm.invalid) {
@@ -130,9 +130,9 @@ export class ServiceManagementComponent implements OnInit {
         } else {
           this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
             if (data.statusCode === 200) {
+              this.profileUrl = '';
               this.serviceText = 'Create Service';
               this.serviceForm.reset();
-              this.profileUrl = '';
               this.getServiceList(0, 0);
               this.toastr.success('', data.message)
             } else {
@@ -155,6 +155,7 @@ export class ServiceManagementComponent implements OnInit {
               data.serviceImageUrl = res.url;
               this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
                 if (data.statusCode === 201) {
+                  this.profileUrl = '';
                   this.serviceText = 'Create Service';
                   this.serviceForm.reset();
                   this.toastr.success('', data.message)
@@ -171,6 +172,7 @@ export class ServiceManagementComponent implements OnInit {
         } else {
           this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
             if (data.statusCode === 201) {
+              this.profileUrl = '';
               this.serviceText = 'Create Service';
               this.serviceForm.reset();
               this.toastr.success('', data.message);
@@ -189,7 +191,7 @@ export class ServiceManagementComponent implements OnInit {
 
   cancel() {
     this.profileUrl = '';
-    this.serviceForm.controls.serviceName.setErrors(null)
+    this.serviceForm.controls.serviceName.setErrors(null);
     this.serviceText = 'Create Service';
     this.serviceId = 0;
     this.isUpdate = false;

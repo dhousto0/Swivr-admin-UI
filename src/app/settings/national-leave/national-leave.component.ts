@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { LeaveManagementService } from 'src/app/service/setting-service/leave-management.service';
 import {DialogComponent} from '../../service-management/dialog/dialog.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-national-leave',
@@ -26,6 +27,7 @@ export class NationalLeaveComponent implements OnInit {
   pageSizeArray = [15, 50, 100];
   isUpdate = false;
   nationalId: any;
+  todayDate = new Date();
   dateStartDate: any = { showDate: new Date() };
 
   constructor(public formBuilder: FormBuilder,
@@ -34,7 +36,7 @@ export class NationalLeaveComponent implements OnInit {
               public dialog: MatDialog) {
       this.columnTitle = ['National Holiday', 'Date', 'Action'];
       this.nationalLeaveForm = this.formBuilder.group({
-        nationalLeaves: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])],
+        nationalLeaves: ['', Validators.compose([Validators.pattern('^[a-zA-Z ]*$'), Validators.required])],
         date: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])]
       });
      }
@@ -93,7 +95,7 @@ export class NationalLeaveComponent implements OnInit {
         const data = {
           id: this.nationalId,
           nationalLeaves: this.nationalLeaveForm.value.nationalLeaves,
-          date: this.nationalLeaveForm.value.date
+          date: moment(this.nationalLeaveForm.value.date).format('YYYY-MM-DD')
         };
         this.isUpdate = false;
 
@@ -104,6 +106,8 @@ export class NationalLeaveComponent implements OnInit {
               nationalLeaves: '',
               date: ''
             });
+            this.nationalLeaveForm.controls.nationalLeaves.setErrors(null);
+            this.nationalLeaveForm.controls.date.setErrors(null);
             this.getNationalHoliday(0, 0);
           } else {
             this.toastr.error('', res.message);
@@ -111,13 +115,19 @@ export class NationalLeaveComponent implements OnInit {
         });
 
       } else {
-        this.leaveManagementService.addNationalHoliday(this.nationalLeaveForm.value).subscribe((res: any) => {
+        const data = {
+          nationalLeaves: this.nationalLeaveForm.value.nationalLeaves,
+          date: moment(this.nationalLeaveForm.value.date).format('YYYY-MM-DD')
+        };
+        this.leaveManagementService.addNationalHoliday(data).subscribe((res: any) => {
           if (res.statusCode === 201) {
             this.toastr.success('', res.message);
             this.nationalLeaveForm.patchValue({
               nationalLeaves: '',
               date: ''
             });
+            this.nationalLeaveForm.controls.nationalLeaves.setErrors(null);
+            this.nationalLeaveForm.controls.date.setErrors(null);
             this.getNationalHoliday(0, 0);
           } else {
             this.toastr.error('', res.message);
@@ -154,6 +164,11 @@ export class NationalLeaveComponent implements OnInit {
   }
 
   cancel(){
-    this.nationalLeaveForm.reset();
+    this.nationalLeaveForm.patchValue({
+      nationalLeaves: '',
+      date: new Date()
+    });
+    this.nationalLeaveForm.controls.nationalLeaves.setErrors(null);
+    this.nationalLeaveForm.controls.date.setErrors(null);
   }
 }

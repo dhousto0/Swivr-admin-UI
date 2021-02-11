@@ -24,12 +24,12 @@
               <div class="panel-custom clearfix">
                 <div class="detail_section clearfix">
                   <div class="row col-md-12">
-                    <div class="col-md-2">
+                    <div class="col-md-5">
                       <div> <span class="left_labels">
-                            Address: </span></div>
+                            Email: </span></div>
                     </div>
-                    <div class="col-md-9" style="    padding-left: 8px;">
-                      <div><span><strong>{{cosmetologistDetails?.address}}</strong></span></div>
+                    <div class="col-md-7">
+                      <div><span><strong>{{cosmetologistDetails?.email}}</strong></span></div>
                     </div>
                   </div>
                 </div>
@@ -38,29 +38,30 @@
               <div class="panel-custom clearfix">
                 <div class="detail_section clearfix">
                   <div class="row col-md-12">
-                    <div class="col-md-6 row">
                     <div class="col-md-5">
                       <div> <span class="left_labels">
-                            Email: </span></div>
-                    </div>
-                    <div class="col-md-7" style="padding: 0;">
-                      <div><span class="word"><strong>{{cosmetologistDetails?.email}}</strong></span></div>
-                    </div>
-                    </div>
-                    <div class="col-md-6 row">
-                    <div class="col-md-5">
-                      <div> <span class="left_labels">
-                          Contact Number: </span></div>
+                            Contact Number: </span></div>
                     </div>
                     <div class="col-md-7">
                       <div><span><strong>{{cosmetologistDetails?.phone}}</strong></span></div>
-                    </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-
+              <div class="panel-custom clearfix">
+                <div class="detail_section clearfix">
+                  <div class="row col-md-12">
+                    <div class="col-md-5">
+                      <div> <span class="left_labels">
+                            Address: </span></div>
+                    </div>
+                    <div class="col-md-7">
+                      <div><span><strong>{{cosmetologistDetails?.address}}</strong></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             </div>
           </div>
@@ -81,57 +82,44 @@
               <div class="panel-custom clearfix">
                 <div class="detail_section clearfix">
                   <div class="row col-md-12">
-                    <div class="col-md-2">
+                    <div class="col-md-5">
+                      <div> <span class="left_labels">
+                            Email: </span></div>
+                    </div>
+                    <div class="col-md-7">
+                      <div><span><strong>{{shopDetails.email}}</strong></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-custom clearfix">
+                <div class="detail_section clearfix">
+                  <div class="row col-md-12">
+                    <div class="col-md-5">
+                      <div> <span class="left_labels">
+                            Contact Number: </span></div>
+                    </div>
+                    <div class="col-md-7">
+                      <div><span><strong>{{shopDetails?.phone}}</strong></span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-custom clearfix">
+                <div class="detail_section clearfix">
+                  <div class="row col-md-12">
+                    <div class="col-md-5">
                       <div> <span class="left_labels">
                             Address: </span></div>
                     </div>
-                    <div class="col-md-9" style="    padding-left: 8px;">
+                    <div class="col-md-7">
                       <div><span><strong>{{shopDetails?.address}}</strong></span></div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div class="panel-custom clearfix">
-                <div class="detail_section clearfix">
-                  <div class="row col-md-12">
-                    <!-- <div class="col-md-6 row"> -->
-                      <div class="col-md-2">
-                        <div> <span class="left_labels">
-                            Email: </span></div>
-                      </div>
-                      <div class="col-md-9" style="padding: 0;">
-                        <div><span class="word"><strong>{{shopDetails.email}}</strong></span></div>
-                      </div>
-                    <!-- </div> -->
-                    <!-- <div class="col-md-6 row">
-                      <div class="col-md-6">
-                        <div> <span class="left_labels">
-                          Contact Number : </span></div>
-                      </div>
-                      <div class="col-md-6">
-                        <div><span><strong>{{shopDetails?.phone}}</strong></span></div>
-                      </div>
-                    </div> -->
-                  </div>
-                </div>
-              </div>
-
-              <div class="panel-custom clearfix">
-                <div class="detail_section clearfix">
-                  <div class="row col-md-12">
-                      <div class="col-md-2">
-                        <div> <span class="left_labels">
-                          Contact: </span></div>
-                      </div>
-                      <div class="col-md-9">
-                        <div><span><strong>{{shopDetails?.phone}}</strong></span></div>
-                      </div>
-                    </div>
-                    </div>
-                    </div>
-
-
 
             </div>
           </div>
@@ -163,9 +151,9 @@
               <tr class="no_border">
                  <td class="data-format milestone_name">
 <!--                      <p-treeTableToggler *ngIf="node.review.length > 0" class="toggler-class" [rowNode]="rowNode"></p-treeTableToggler>-->
-                  <span><img class="customer-profile" src="{{node?.customerDetails.profileUrl}}" (error)="setDefaultPic('appointment', node)"></span>
-                      <span class="data_format" (click)="toggleNode(rowNode)" *ngIf="node.review.length > 0">{{node?.customerDetails.fullName}}  {{node?.appointmentId}}</span>
-                      <span class="data_format" *ngIf="node.review.length === 0">{{node?.customerDetails.fullName}}</span>
+                  <span><img class="customer-profile" src="{{node?.customerDetails?.profileUrl}}" (error)="setDefaultPic('appointment', node)"></span>
+                      <span class="data_format" (click)="toggleNode(rowNode)" *ngIf="node.review.length > 0">{{node?.customerDetails?.fullName}}  {{node?.appointmentId}}</span>
+                      <span class="data_format" *ngIf="node.review.length === 0">{{node?.customerDetails?.fullName}}</span>
                       <span *ngIf="node?.review.length">
                          <div class="review-title">Review</div>
                         <div *ngFor="let element of node?.review"class="review-align">
@@ -187,7 +175,7 @@
                     </td>
 
                     <td class="data-format milestone_start_dt">
-                      <span>{{node.appointmentDate | date: 'medium'}}</span>
+                      <span>{{node.appointmentDate.slice(0, node.appointmentDate.length - 1) | date: 'medium'}}</span>
                </td>
 
                <td class="data-format milestone_task-status">

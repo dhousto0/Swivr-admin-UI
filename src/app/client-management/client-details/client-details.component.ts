@@ -45,6 +45,7 @@ export class ClientDetailsComponent implements OnInit {
         let hours = Math.floor(offset / 60) < 10 ? extraZero + Math.floor(offset / 60) : Math.floor(offset / 60);
       this.timezone = '-' + hours + ':' + extraZero + (offset % 60);
     }
+    console.log(this.timezone)
 
     this.getClientDetails();
     this.getAppointmentDetails(10, 0);

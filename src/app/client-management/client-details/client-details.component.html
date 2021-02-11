@@ -24,12 +24,12 @@
             <div class="panel-custom clearfix">
               <div class="detail_section clearfix">
                 <div class="row col-md-12">
-                  <div class="col-md-2">
+                  <div class="col-md-5">
                     <div> <span class="left_labels">
-                            Address: </span></div>
+                            Email: </span></div>
                   </div>
-                  <div class="col-md-9" style="padding-left: 8px;">
-                    <div><span><strong>{{clientDetails?.address}}</strong></span></div>
+                  <div class="col-md-7">
+                    <div><span><strong>{{clientDetails?.email}}</strong></span></div>
                   </div>
                 </div>
               </div>
@@ -38,29 +38,30 @@
             <div class="panel-custom clearfix">
               <div class="detail_section clearfix">
                 <div class="row col-md-12">
-                  <div class="col-md-6 row">
-                    <div class="col-md-5">
-                      <div> <span class="left_labels">
-                            Email: </span></div>
-                    </div>
-                    <div class="col-md-7" style="padding: 0;">
-                      <div><span class='word'><strong>{{clientDetails?.email}}</strong></span></div>
-                    </div>
+                  <div class="col-md-5">
+                    <div> <span class="left_labels">
+                            Contact Number: </span></div>
                   </div>
-                  <div class="col-md-6 row">
-                    <div class="col-md-6">
-                      <div> <span class="left_labels">
-                          Contact Number: </span></div>
-                    </div>
-                    <div class="col-md-6">
-                      <div><span><strong>{{clientDetails?.phone}}</strong></span></div>
-                    </div>
+                  <div class="col-md-7">
+                    <div><span><strong>{{clientDetails?.phone}}</strong></span></div>
                   </div>
                 </div>
               </div>
             </div>
 
-
+            <div class="panel-custom clearfix">
+              <div class="detail_section clearfix">
+                <div class="row col-md-12">
+                  <div class="col-md-5">
+                    <div> <span class="left_labels">
+                            Address: </span></div>
+                  </div>
+                  <div class="col-md-7">
+                    <div><span><strong>{{clientDetails?.address}}</strong></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -116,7 +117,7 @@
                     </td>
 
                     <td class="data-format milestone_start_dt">
-                      <span>{{node.appointmentDate | date: 'medium'}}</span>
+                      <span>{{node.appointmentDate.slice(0, node.appointmentDate.length - 1) | date: 'medium'}}</span>
                     </td>
 
                     <td class="data-format milestone_task-status">

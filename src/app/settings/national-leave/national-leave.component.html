@@ -77,7 +77,7 @@
                       <mat-form-field class="example-full-width w-100" appearance="outline">
                         <mat-label>Holiday Date</mat-label>
 
-                        <input required date="true" [(ngModel)]="dateStartDate.showDate"
+                        <input required date="true" [(ngModel)]="dateStartDate.showDate" [min]="todayDate"
                                matInput formControlName="date" [matDatepicker]="picker" (focus)="picker.open()"
                                name="date">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

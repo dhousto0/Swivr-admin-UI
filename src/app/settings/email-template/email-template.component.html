@@ -6,7 +6,7 @@
             <div class="row" *ngIf="templateList && templateList.length !== 0">
                 <div class="btn-group1">
                     <button class="btn" *ngFor="let template of templateList" (click)="getTemplate(template)">{{template?.emailType}}</button>
-                    <button class="btn create-btn" (click)="addTemplate()"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
+                    <button class="btn" (click)="addTemplate()"><i class="fa fa-plus" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="row">
@@ -39,7 +39,8 @@
         <div class="row">
             <div class="col-md-12">
             <div class="btn-div pull-right">
-                <button mat-flat-button type="submit" color="primary" class="display edit-icon" (click)="saveTemplateSettings()">Save Changes</button>
+                <button mat-flat-button type="submit" color="primary" class="display edit-icon" (click)="saveTemplateSettings()" *ngIf="!isUpdate">Submit</button>
+                <button mat-flat-button type="submit" color="primary" class="display edit-icon" (click)="saveTemplateSettings()" *ngIf="isUpdate">Save Changes</button>
                 <button mat-flat-button class="display cancel-button" (click)="getTemplate(selectedTemplate)">Cancel</button>
                 <!-- [ngClass]="!permissionService.settingsEmailTemplates.edit ? 'disabledClass' : 'noDisabled'" -->
             </div>
