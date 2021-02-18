@@ -4,11 +4,8 @@ import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 import {catchError, finalize, tap} from 'rxjs/operators';
 import {NgxSpinnerService} from 'ngx-spinner';
-// tslint:disable-next-line:import-blacklist
-import {Observable} from 'rxjs/Rx';
-import 'rxjs/add/operator/catch';
+import {Observable} from 'rxjs';
 import {UserServiceService} from './user-service.service';
-import {EStatusCode} from './constant';
 
 
 @Injectable()
@@ -33,25 +30,35 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       this.spinner.show();
       this.count++;
 
-      return next.handle(reqh)
-        .catch((error: HttpErrorResponse) => {
-          if ((error as HttpErrorResponse).status === 419) {
-            this.removeSpinner();
-            this.logoutUser();
-            return Observable.throw(error);
-          } else if ((error as HttpErrorResponse).status === EStatusCode.UNAUTHORIZED) {
-            this.removeSpinner();
-            this.logoutUser();
-            return Observable.throw(error);
-          } else {
-            this.removeSpinner();
-            this.logoutUser();
-            return Observable.throw(error);
-          }
-        }).finally(() => {
+      return next.handle(reqh) .pipe (
+        catchError((err: any) => {
           this.removeSpinner();
-          return ;
-        });
+          this.logoutUser();
+          return Observable.throw(err);
+        }), finalize(() => {
+          this.removeSpinner();
+        })
+      );
+
+      // return next.handle(reqh)
+      //   .catch((error: HttpErrorResponse) => {
+      //     if ((error as HttpErrorResponse).status === 419) {
+      //       this.removeSpinner();
+      //       this.logoutUser();
+      //       return Observable.throw(error);
+      //     } else if ((error as HttpErrorResponse).status === EStatusCode.UNAUTHORIZED) {
+      //       this.removeSpinner();
+      //       this.logoutUser();
+      //       return Observable.throw(error);
+      //     } else {
+      //       this.removeSpinner();
+      //       this.logoutUser();
+      //       return Observable.throw(error);
+      //     }
+      //   }).finally(() => {
+      //     this.removeSpinner();
+      //     return ;
+      //   });
     } else {
       let reqh = request;
       this.router.navigate(['/login']);
@@ -59,8 +66,8 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       this.spinner.show();
       this.count++;
 
-      return next.handle(reqh) .pipe ( tap (
-        ), finalize(() => {
+      return next.handle(reqh) .pipe (
+        finalize(() => {
           this.removeSpinner();
         })
       );

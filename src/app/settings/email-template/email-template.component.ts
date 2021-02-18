@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { EmailTemplateService } from 'src/app/service/setting-service/email-template.service';
-import {EStatusCode} from "../../service/constant";
+import {EStatusCode} from '../../service/constant';
+declare var CKEDITOR: any;
 
 @Component({
   selector: 'app-email-template',
