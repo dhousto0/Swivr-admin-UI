@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import {ServiceManagementService} from '../service/service-management.service';
 import { UserServiceService } from '../service/user-service.service';
 import { DialogComponent } from './dialog/dialog.component';
+import {EStatusCode} from "../service/constant";
 
 @Component({
   selector: 'app-service-management',
@@ -65,7 +66,7 @@ export class ServiceManagementComponent implements OnInit {
     };
 
     this.serviceManagementService.serviceList().subscribe((data: any) => {
-      if (data.statusCode === 200) {
+      if (data.statusCode === EStatusCode.OK) {
         this.servicesList = data.list;
         this.dataSource.data = data.list;
         this.rowCount = data.list.length;
@@ -109,18 +110,18 @@ export class ServiceManagementComponent implements OnInit {
             formData.append("file", this.uploadedFiles[i], this.uploadedFiles[i].name);
           }
           this.userServiceService.imageUpload('SERVICES', formData).subscribe((res: any) => {
-            if (res.statusCode === 200) {
+            if (res.statusCode === EStatusCode.OK) {
               console.log(res.url, res);
               data.serviceImageUrl = res.url;
               this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
-                if (data.statusCode === 200) {
+                if (data.statusCode === EStatusCode.OK) {
                   this.profileUrl = '';
                   this.serviceText = 'Create Service';
                   this.serviceForm.reset();
                   this.getServiceList(0, 0);
-                  this.toastr.success('', data.message)
+                  this.toastr.success('', data.message);
                 } else {
-                  this.toastr.error('', data.message)
+                  this.toastr.error('', data.message);
                 }
               });
             } else {
@@ -129,7 +130,7 @@ export class ServiceManagementComponent implements OnInit {
           });
         } else {
           this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
-            if (data.statusCode === 200) {
+            if (data.statusCode === EStatusCode.OK) {
               this.profileUrl = '';
               this.serviceText = 'Create Service';
               this.serviceForm.reset();
@@ -151,10 +152,10 @@ export class ServiceManagementComponent implements OnInit {
             formData.append("file", this.uploadedFiles[i], this.uploadedFiles[i].name);
           }
           this.userServiceService.imageUpload('SERVICES', formData).subscribe((res: any) => {
-            if (res.statusCode === 200) {
+            if (res.statusCode === EStatusCode.OK) {
               data.serviceImageUrl = res.url;
               this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
-                if (data.statusCode === 201) {
+                if (data.statusCode === EStatusCode.CREATED) {
                   this.profileUrl = '';
                   this.serviceText = 'Create Service';
                   this.serviceForm.reset();
@@ -171,7 +172,7 @@ export class ServiceManagementComponent implements OnInit {
           });
         } else {
           this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
-            if (data.statusCode === 201) {
+            if (data.statusCode === EStatusCode.CREATED) {
               this.profileUrl = '';
               this.serviceText = 'Create Service';
               this.serviceForm.reset();
@@ -220,7 +221,7 @@ export class ServiceManagementComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res: any) => {
       if(res){
           this.serviceManagementService.serviceDelete(value.id).subscribe((data: any) => {
-          if(data.statusCode === 200){
+          if(data.statusCode === EStatusCode.OK){
             this.toastr.success('', data.message);
             this.getServiceList(0, 0);
           } else {

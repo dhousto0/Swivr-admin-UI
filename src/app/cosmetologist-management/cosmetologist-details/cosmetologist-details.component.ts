@@ -3,6 +3,7 @@ import {CosmetologistServiceService} from '../../service/cosmetologist-service.s
 import {ActivatedRoute} from '@angular/router';
 import { TreeNode} from 'primeng/api/treenode';
 import {UserServiceService} from '../../service/user-service.service';
+import {EStatusCode} from "../../service/constant";
 
 @Component({
   selector: 'app-cosmetologist-details',
@@ -54,7 +55,7 @@ export class CosmetologistDetailsComponent implements OnInit {
   getCosmetologistDetails() {
 
     this.cosmetologistServiceService.cosmetologistDetails(this.userKey).subscribe((data: any) => {
-      if (data.statusCode === 200) {
+      if (data.statusCode === EStatusCode.OK) {
         this.cosmetologistDetails = data.data.cosmetologist;
         this.shopDetails = data.data.shopDetails;
       }
@@ -64,7 +65,7 @@ export class CosmetologistDetailsComponent implements OnInit {
   getAppointmentDetails(limit: number, start: number) {
 
     this.cosmetologistServiceService.getAppointmentList(this.userKey, 'USER', start, limit, this.timezone).subscribe((data: any) => {
-      if (data.statusCode === 200) {
+      if (data.statusCode === EStatusCode.OK) {
         this.appointmentList = this.appointmentList.concat(data.list);
         // this.appointmentList = data.list;
         this.appointmentCount = data.count;

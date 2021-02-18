@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {ClientServiceService} from '../../service/client-service.service';
+import {EStatusCode} from "../../service/constant";
 
 @Component({
   selector: 'app-client-list',
@@ -39,7 +40,7 @@ export class ClientListComponent implements OnInit {
     }
 
     this.clientServiceService.clientList(this.start, this.limit).subscribe((data: any) => {
-      if (data.statusCode === 200) {
+      if (data.statusCode === EStatusCode.OK) {
         this.dataSource.data = data.list;
         this.rowCount = data.count;
       }

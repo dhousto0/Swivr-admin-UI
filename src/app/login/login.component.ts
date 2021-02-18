@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {UserServiceService} from '../service/user-service.service';
+import {EStatusCode} from "../service/constant";
 
 @Component({
   selector: 'app-login',
@@ -46,7 +47,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if(!this.loginForm.value.username || !this.loginForm.value.password) {
+    if (!this.loginForm.value.username || !this.loginForm.value.password) {
       this.errorClose = true;
     } else {
       var data = {
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit {
         timeZone: this.timezone
       };
       this.userServiceService.login(data).subscribe((data: any) => {
-        if (data.statusCode === 200) {
+        if (data.statusCode === EStatusCode.OK) {
           this.toastr.success('', data.message);
           this.userServiceService.updateIsUserLogged.next(true);
           localStorage.setItem('accessToken', data.accessToken);

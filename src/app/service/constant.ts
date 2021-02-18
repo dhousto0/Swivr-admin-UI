@@ -30,5 +30,12 @@ export const API = {
   REMOVE_NATIONAL_HOLIDAY: API_ENDPOINT_URL + '/appointments/admin/removeNationalHolidays',
   NATIONAL_HOLIDAY_LIST: API_ENDPOINT_URL + '/appointments/admin/listNationalHolidays',
   DEFAULT_EMAIL_TEMPLATE: API_ENDPOINT_URL + '/admin/getDefaultEmailTemplate'
-  
+};
+
+
+export const EStatusCode = {
+  OK: 200,
+  CREATED: 201,
+  UNAUTHORIZED: 401,
+  FAILURE: 404,
 };

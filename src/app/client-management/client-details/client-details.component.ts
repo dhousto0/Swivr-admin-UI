@@ -4,6 +4,7 @@ import {CosmetologistServiceService} from '../../service/cosmetologist-service.s
 import {ActivatedRoute} from '@angular/router';
 import {UserServiceService} from '../../service/user-service.service';
 import {ClientServiceService} from '../../service/client-service.service';
+import {EStatusCode} from '../../service/constant';
 
 @Component({
   selector: 'app-client-details',
@@ -25,7 +26,7 @@ export class ClientDetailsComponent implements OnInit {
               private userServiceService: UserServiceService) {
     this.userServiceService.headerNameUpdate.next('Client Management');
     this.route.params.subscribe(params => {
-      this.custKey = params['id'];
+      this.custKey = params.id;
     });
   }
 
@@ -45,7 +46,7 @@ export class ClientDetailsComponent implements OnInit {
         let hours = Math.floor(offset / 60) < 10 ? extraZero + Math.floor(offset / 60) : Math.floor(offset / 60);
       this.timezone = '-' + hours + ':' + extraZero + (offset % 60);
     }
-    console.log(this.timezone)
+    console.log(this.timezone);
 
     this.getClientDetails();
     this.getAppointmentDetails(10, 0);
@@ -53,7 +54,7 @@ export class ClientDetailsComponent implements OnInit {
 
   getClientDetails() {
     this.clientServiceService.clientDetails(this.custKey).subscribe((data: any) => {
-      if (data.statusCode === 200) {
+      if (data.statusCode === EStatusCode.OK) {
         this.clientDetails = data.customer;
       }
     });
@@ -62,7 +63,7 @@ export class ClientDetailsComponent implements OnInit {
   getAppointmentDetails(limit: number, start: number) {
 
     this.clientServiceService.getAppointmentList(this.custKey, 'CUSTOMER', start, limit, this.timezone).subscribe((data: any) => {
-      if (data.statusCode === 200) {
+      if (data.statusCode === EStatusCode.OK) {
         this.appointmentList = this.appointmentList.concat(data.list);
         // this.appointmentList = data.list;
         this.appointmentCount = data.count;
@@ -88,7 +89,7 @@ export class ClientDetailsComponent implements OnInit {
 
   setDefaultPic(type: string, value: any) {
     if (this.clientDetails) {
-      type === 'appointment' ? value.shopDetails.profileUrl = '/assets/img/shop_profile.png' : this.clientDetails.userProfileUrl = '/assets/img/user_profile.jpg';
+      type === 'appointment' ? value.shopDetails.profileUrl = '/assets/img/shop_profile.png' : this.clientDetails.custProfileUrl = '/assets/img/user_profile.jpg';
     }
   }
 }

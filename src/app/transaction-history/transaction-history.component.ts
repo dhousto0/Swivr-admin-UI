@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {transactionHistoryService} from '../service/transaction-history.service';
+import {EStatusCode} from "../service/constant";
 
 @Component({
   selector: 'app-transaction-history',
@@ -32,7 +33,7 @@ export class TransactionHistoryComponent implements OnInit {
       limit : limit
     };
     this.transactionHistoryService.getTransactionHistory(data).subscribe((res: any) => {
-      if (res.statusCode === 200) {
+      if (res.statusCode === EStatusCode.OK) {
         this.dataSource = this.dataSource.concat(res.transactionDetails);
       } else {
         this.dataSource = [];

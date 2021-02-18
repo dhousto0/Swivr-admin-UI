@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LeaveManagementService } from 'src/app/service/setting-service/leave-management.service';
 import {DialogComponent} from '../../service-management/dialog/dialog.component';
 import * as moment from 'moment';
+import {EStatusCode} from "../../service/constant";
 
 @Component({
   selector: 'app-national-leave',
@@ -79,7 +80,7 @@ export class NationalLeaveComponent implements OnInit {
     }
 
     this.leaveManagementService.nationalHolidayList(this.start, this.limit).subscribe( (res: any) => {
-      if (res.statusCode === 200){
+      if (res.statusCode === EStatusCode.OK){
         this.dataSource = res.list;
         this.rowCount = res.count;
       }
@@ -100,7 +101,7 @@ export class NationalLeaveComponent implements OnInit {
         this.isUpdate = false;
 
         this.leaveManagementService.updateNationalHoliday(data).subscribe((res: any) => {
-          if (res.statusCode === 200) {
+          if (res.statusCode === EStatusCode.OK) {
             this.toastr.success('', res.message);
             this.nationalLeaveForm.patchValue({
               nationalLeaves: '',
@@ -120,7 +121,7 @@ export class NationalLeaveComponent implements OnInit {
           date: moment(this.nationalLeaveForm.value.date).format('YYYY-MM-DD')
         };
         this.leaveManagementService.addNationalHoliday(data).subscribe((res: any) => {
-          if (res.statusCode === 201) {
+          if (res.statusCode === EStatusCode.CREATED) {
             this.toastr.success('', res.message);
             this.nationalLeaveForm.patchValue({
               nationalLeaves: '',
@@ -150,7 +151,7 @@ export class NationalLeaveComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res){
           this.leaveManagementService.removeNationalHoliday(value.id).subscribe((data: any) => {
-          if (data.statusCode === 200){
+          if (data.statusCode === EStatusCode.OK){
             this.toastr.success('', data.message);
             this.getNationalHoliday(0, 0);
 

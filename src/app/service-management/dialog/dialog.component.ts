@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceManagementService } from 'src/app/service/service-management.service';
+import {EStatusCode} from "../../service/constant";
 
 @Component({
   selector: 'app-dialog',
@@ -31,7 +32,7 @@ export class DialogComponent implements OnInit {
   serviceImagesList() {
 
     this.serviceManagementService.serviceImageList().subscribe( (res: any) => {
-      if(res.statusCode === 200){
+      if(res.statusCode === EStatusCode.OK){
         res.list.forEach( (obj: any) => {
           obj.isSelected = false;
         });
@@ -70,9 +71,5 @@ export class DialogComponent implements OnInit {
     } else {
       this.toaster.error('', 'Please Choose Service Image');
     }
-  }
-
-  setDefaultPic() {
-
   }
 }

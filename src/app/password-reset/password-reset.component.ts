@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import {UserServiceService} from '../service/user-service.service';
 import {Router} from "@angular/router";
+import {EStatusCode} from "../service/constant";
 
 @Component({
   selector: 'app-password-reset',
@@ -70,7 +71,7 @@ export class PasswordResetComponent implements OnInit {
         password: this.resetForm.value.password
       };
       this.userServiceService.resetPassword(data).subscribe((data: any) => {
-        if (data.statusCode === 200) {
+        if (data.statusCode === EStatusCode.OK) {
           this.router.navigate(['/profile']);
           this.toastr.success('', data.message);
         } else {

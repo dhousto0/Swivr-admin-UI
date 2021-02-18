@@ -1,10 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 import {catchError, finalize, tap} from 'rxjs/operators';
-import {Observable} from "rxjs";
-import {NgxSpinnerService} from "ngx-spinner";
+import {NgxSpinnerService} from 'ngx-spinner';
+// tslint:disable-next-line:import-blacklist
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/catch';
+import {UserServiceService} from './user-service.service';
+import {EStatusCode} from './constant';
 
 
 @Injectable()
@@ -12,17 +16,13 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
   count = 0;
 
   constructor(private router: Router,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private userServiceService: UserServiceService) {
 
   }
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // const currentUser = localStorage.getItem('login');
-    // if(currentUser === 'true') {
-    // } else {
-    //   this.router.navigate(['/login']);
-    // }
     const token = localStorage.getItem('accessToken');
     if (token) {
       const reqh = request.clone({
@@ -33,16 +33,25 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       this.spinner.show();
       this.count++;
 
-      return next.handle(reqh) .pipe ( tap (
-
-        ), finalize(() => {
-        this.count--;
-
-        if ( this.count === 0 ) {
-          this.spinner.hide ();
-        }
-        })
-      );
+      return next.handle(reqh)
+        .catch((error: HttpErrorResponse) => {
+          if ((error as HttpErrorResponse).status === 419) {
+            this.removeSpinner();
+            this.logoutUser();
+            return Observable.throw(error);
+          } else if ((error as HttpErrorResponse).status === EStatusCode.UNAUTHORIZED) {
+            this.removeSpinner();
+            this.logoutUser();
+            return Observable.throw(error);
+          } else {
+            this.removeSpinner();
+            this.logoutUser();
+            return Observable.throw(error);
+          }
+        }).finally(() => {
+          this.removeSpinner();
+          return ;
+        });
     } else {
       let reqh = request;
       this.router.navigate(['/login']);
@@ -51,18 +60,26 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       this.count++;
 
       return next.handle(reqh) .pipe ( tap (
-
         ), finalize(() => {
-        this.count--;
-
-        if ( this.count === 0 ) {
-          this.spinner.hide ();
-        }
+          this.removeSpinner();
         })
       );
     }
 
   }
 
+  // tslint:disable-next-line:typedef
+  logoutUser() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+    this.userServiceService.updateIsUserLogged.next(false);
+    return Observable.throw('');
+  }
+  removeSpinner() {
+    this.count--;
 
+    if ( this.count === 0 ) {
+      this.spinner.hide ();
+    }
+  }
 }

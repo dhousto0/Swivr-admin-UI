@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserServiceService } from '../service/user-service.service';
+import {EStatusCode} from "../service/constant";
 
 @Component({
   selector: 'app-payout-management',
@@ -30,7 +31,7 @@ export class PayoutManagementComponent implements OnInit {
 
   getPayoutDetails(){
     this.userServiceService.getPayoutDetails().subscribe((data: any) => {
-      if (data.statusCode === 200) {
+      if (data.statusCode === EStatusCode.OK) {
         this.isUpdate = false;
         this.payoutDetails = data.data;
       } else {
@@ -52,7 +53,7 @@ export class PayoutManagementComponent implements OnInit {
 
     this.userServiceService.addUpdatePayout(data).subscribe((res: any) => {
       if(res){
-        if(res.statusCode === 200){
+        if(res.statusCode === EStatusCode.OK){
           this.isUpdate = false;
           this.toastr.success('', res.message);
           this.getPayoutDetails();

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { EmailTemplateService } from 'src/app/service/setting-service/email-template.service';
+import {EStatusCode} from "../../service/constant";
 
 @Component({
   selector: 'app-email-template',
@@ -17,7 +18,7 @@ export class EmailTemplateComponent implements OnInit {
   selectedTemplate: any;
 
   constructor(private fb: FormBuilder, private emailTemplateService: EmailTemplateService,
-    private toaster: ToastrService) { 
+    private toaster: ToastrService) {
     this.emailTemplatesForm = this.fb.group({
       templatetype: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])],
       templateSubject: ['', Validators.compose([Validators.pattern(/.*\S.*/), Validators.required])],
@@ -55,7 +56,7 @@ export class EmailTemplateComponent implements OnInit {
 
   getEmailTemplate(){
     this.emailTemplateService.getEmailTemplate().subscribe( (res: any) => {
-      if(res.statuscode === 200){
+      if(res.statuscode === EStatusCode.OK){
         this.templateList = res.list;
         if(!this.isUpdate){
           this.selectedTemplate = res.list[0];
@@ -118,7 +119,7 @@ export class EmailTemplateComponent implements OnInit {
 
   getDefaultEmailTemplate(){
     this.emailTemplateService.defaultEmailTemplate().subscribe((res: any) => {
-      if(res.statusCode === 200){
+      if(res.statusCode === EStatusCode.OK){
         this.emailTemplatesForm.patchValue({
           templatetype: '',
           templateSubject: '',

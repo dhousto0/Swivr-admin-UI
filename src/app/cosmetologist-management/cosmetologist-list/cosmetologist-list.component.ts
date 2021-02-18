@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {CosmetologistServiceService} from '../../service/cosmetologist-service.service';
+import {EStatusCode} from "../../service/constant";
 
 @Component({
   selector: 'app-cosmetologist-list',
@@ -39,7 +40,7 @@ export class CosmetologistListComponent implements OnInit {
     }
 
     this.cosmetologistServiceService.cosmetologistList(this.start, this.limit).subscribe((data: any) => {
-      if (data.statusCode === 200) {
+      if (data.statusCode === EStatusCode.OK) {
         this.dataSource.data = data.list;
         this.rowCount = data.count;
       }

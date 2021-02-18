@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import {UserServiceService} from '../service/user-service.service';
+import {EStatusCode} from "../service/constant";
 
 @Component({
   selector: 'app-profile',
@@ -35,7 +36,7 @@ export class ProfileComponent implements OnInit {
 
   profileView() {
     this.userServiceService.profileView().subscribe((data: any) => {
-      if (data.statusCode === 200) {
+      if (data.statusCode === EStatusCode.OK) {
         this.profileDetails = data.admin;
         localStorage.setItem('fullName', this.profileDetails.fullName);
         localStorage.setItem('adminProfile', this.profileDetails.adminProfileUrl);
@@ -56,7 +57,7 @@ export class ProfileComponent implements OnInit {
         formData.append("file", this.uploadedFiles[i], this.uploadedFiles[i].name);
       }
       this.userServiceService.imageUpload('ADMIN', formData).subscribe((res: any) => {
-        if (res.statusCode === 200) {
+        if (res.statusCode === EStatusCode.OK) {
           let data = {
             fullName: this.profileForm.value.fullName,
             userName: this.profileForm.value.userName,
@@ -65,7 +66,7 @@ export class ProfileComponent implements OnInit {
             adminProfile: res.url
           };
           this.userServiceService.profileUpdate(data).subscribe((data: any) => {
-            if (data.statusCode === 200) {
+            if (data.statusCode === EStatusCode.OK) {
               this.isUpdate = false;
               this.toastr.success('', data.message);
 
@@ -88,7 +89,7 @@ export class ProfileComponent implements OnInit {
         adminProfile: this.profileDetails.adminProfile
       };
       this.userServiceService.profileUpdate(data).subscribe((data: any) => {
-        if (data.statusCode === 200) {
+        if (data.statusCode === EStatusCode.OK) {
           this.isUpdate = false;
           this.toastr.success('', data.message);
           this.profileView();

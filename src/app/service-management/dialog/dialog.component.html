@@ -19,7 +19,7 @@
                                 <div class="col-sm-3" *ngFor="let image of serviceImageLists">
                                         <mat-card class="fileinput-new thumbnail panel-custom detail_section clearfix" [ngClass]="image?.isSelected === true ? 'select-image' : 'error-image'" style="width: 150px;" (click)="chooseImage(image)">
                                         <!-- <div > -->
-                                                <img class="w-profile" src="{{image.imageUrl}}" (error)="setDefaultPic()">
+                                                <img class="w-profile" src="{{image.imageUrl}}">
                                         <!-- </div> -->
                                         </mat-card>
                                 </div>
