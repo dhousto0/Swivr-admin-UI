@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import {ServiceManagementService} from '../service/service-management.service';
 import { UserServiceService } from '../service/user-service.service';
 import { DialogComponent } from './dialog/dialog.component';
-import {EStatusCode} from "../service/constant";
+import {EStatusCode} from '../service/constant';
 
 @Component({
   selector: 'app-service-management',
@@ -18,18 +18,19 @@ export class ServiceManagementComponent implements OnInit {
   servicesList: any;
   serviceForm: FormGroup;
   columnTitle: string[] | undefined;
-  rowCount: number = 0;
-  pageSize: number = 15;
+  rowCount = 0;
+  pageSize = 15;
   prevPageIndex: number | undefined = 0;
-  start: number = 0;
-  limit: number = 15;
+  start = 0;
+  limit = 15;
   event: any;
   pageSizeArray = [15, 50, 100];
   serviceText: string | undefined;
-  public isUpdate: boolean = false;
+  public isUpdate = false;
   private serviceId: any;
   uploadedFiles: Array<File> = [] ;
   profileUrl: any = '';
+  private profileName: any;
 
   constructor(public formBuilder: FormBuilder,
               public serviceManagementService: ServiceManagementService,
@@ -59,7 +60,7 @@ export class ServiceManagementComponent implements OnInit {
     } else {
       this.start = count * this.pageSize;
     }
-    let filter = {
+    const filter = {
       limit: this.limit,
       start: this.start,
       search: '',
@@ -86,103 +87,51 @@ export class ServiceManagementComponent implements OnInit {
   }
 
   addUpdateService() {
-    if(this.serviceForm.value.serviceName === '' || this.serviceForm.value.serviceName === null){
-      this.serviceForm.controls.serviceName.setErrors({'incorrect': true});
+    if (this.serviceForm.value.serviceName.trim() === '' || this.serviceForm.value.serviceName === null){
+      this.serviceForm.controls.serviceName.setErrors({incorrect: true});
       return;
     }
-    if(this.profileUrl === ''){
-      this.serviceForm.controls.serviceImage.setErrors({'incorrect': true});
+    if (this.profileUrl === ''){
+      this.serviceForm.controls.serviceImage.setErrors({incorrect: true});
       return;
     }
     // if(this.serviceForm.invalid) {
     //   return;
     // } else {
 
-      if (this.isUpdate) {
-        let data = {
+    if (this.isUpdate) {
+        const data = {
           id: this.serviceId,
           serviceName: this.serviceForm.value.serviceName,
           serviceImageUrl: this.serviceForm.value.serviceImage
         };
-        if (this.uploadedFiles.length) {
-          let formData = new FormData();
-          for (var i = 0; i < this.uploadedFiles.length; i++) {
-            formData.append("file", this.uploadedFiles[i], this.uploadedFiles[i].name);
-          }
-          this.userServiceService.imageUpload('SERVICES', formData).subscribe((res: any) => {
-            if (res.statusCode === EStatusCode.OK) {
-              console.log(res.url, res);
-              data.serviceImageUrl = res.url;
-              this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
-                if (data.statusCode === EStatusCode.OK) {
-                  this.profileUrl = '';
-                  this.serviceText = 'Create Service';
-                  this.serviceForm.reset();
-                  this.getServiceList(0, 0);
-                  this.toastr.success('', data.message);
-                } else {
-                  this.toastr.error('', data.message);
-                }
-              });
-            } else {
-              this.toastr.error('', res.message);
-            }
-          });
-        } else {
-          this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
+        this.serviceManagementService.serviceUpdate(data).subscribe((data: any) => {
             if (data.statusCode === EStatusCode.OK) {
               this.profileUrl = '';
               this.serviceText = 'Create Service';
               this.serviceForm.reset();
               this.getServiceList(0, 0);
-              this.toastr.success('', data.message)
-            } else {
-              this.toastr.error('', data.message)
-            }
-          });
-        }
-      } else {
-        let data = {
-          serviceName: this.serviceForm.value.serviceName,
-          serviceImageUrl: this.serviceForm.value.serviceImage
-        };
-        if (this.uploadedFiles.length) {
-          let formData = new FormData();
-          for (var i = 0; i < this.uploadedFiles.length; i++) {
-            formData.append("file", this.uploadedFiles[i], this.uploadedFiles[i].name);
-          }
-          this.userServiceService.imageUpload('SERVICES', formData).subscribe((res: any) => {
-            if (res.statusCode === EStatusCode.OK) {
-              data.serviceImageUrl = res.url;
-              this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
-                if (data.statusCode === EStatusCode.CREATED) {
-                  this.profileUrl = '';
-                  this.serviceText = 'Create Service';
-                  this.serviceForm.reset();
-                  this.toastr.success('', data.message)
-                  this.getServiceList(0, 0);
-                } else {
-                  this.toastr.error('', data.message);
-                }
-              });
-            } else {
-              this.toastr.error('', res.message);
-            }
-
-          });
-        } else {
-          this.serviceManagementService.serviceAdd(data).subscribe((data: any) => {
-            if (data.statusCode === EStatusCode.CREATED) {
-              this.profileUrl = '';
-              this.serviceText = 'Create Service';
-              this.serviceForm.reset();
               this.toastr.success('', data.message);
-              this.getServiceList(0, 0);
             } else {
               this.toastr.error('', data.message);
             }
           });
-        }
+      } else {
+        const data = {
+          serviceName: this.serviceForm.value.serviceName,
+          serviceImageUrl: this.serviceForm.value.serviceImage
+        };
+        this.serviceManagementService.serviceAdd(data).subscribe((res: any) => {
+            if (res.statusCode === EStatusCode.CREATED) {
+              this.profileUrl = '';
+              this.serviceText = 'Create Service';
+              this.serviceForm.reset();
+              this.toastr.success('', res.message);
+              this.getServiceList(0, 0);
+            } else {
+              this.toastr.error('', res.message);
+            }
+          });
 
       }
     // }
@@ -213,15 +162,15 @@ export class ServiceManagementComponent implements OnInit {
 
   serviceDelete(value: any) {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: "35vw",
-      height: "30vh",
+      width: '35vw',
+      height: '30vh',
       data: { serviceId: value.id, serviceName: value.serviceName}
     });
 
     dialogRef.afterClosed().subscribe((res: any) => {
-      if(res){
+      if (res){
           this.serviceManagementService.serviceDelete(value.id).subscribe((data: any) => {
-          if(data.statusCode === EStatusCode.OK){
+          if (data.statusCode === EStatusCode.OK){
             this.toastr.success('', data.message);
             this.getServiceList(0, 0);
           } else {
@@ -237,21 +186,17 @@ export class ServiceManagementComponent implements OnInit {
     this.uploadedFiles = element.target.files;
   }
 
-  setDefaultPic() {
-      this.profileUrl = '/assets/img/user_profile.jpg';
-  }
-
   chooseImage() {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: "50vw",
-      height: "70vh",
+      width: '50vw',
+      height: '70vh',
       data: { type: 'service'}
     });
 
     dialogRef.afterClosed().subscribe((res: any) => {
-      if(res){
+      if (res){
         this.profileUrl = res.imageUrl;
-          console.log(res);
+        this.serviceForm.value.serviceImage = res.imagePath;
       }
     });
   }

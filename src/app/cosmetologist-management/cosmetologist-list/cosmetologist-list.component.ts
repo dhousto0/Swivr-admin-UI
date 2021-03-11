@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {CosmetologistServiceService} from '../../service/cosmetologist-service.service';
-import {EStatusCode} from "../../service/constant";
+import {EStatusCode} from '../../service/constant';
 
 @Component({
   selector: 'app-cosmetologist-list',

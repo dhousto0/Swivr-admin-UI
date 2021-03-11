@@ -10,7 +10,7 @@
         <div class="details" *ngIf="!isUpdate">
 
             <h3 class="title title-payout">Profile details <span><mat-icon  matTooltipPosition="below"  #tooltip="matTooltip"
-              matTooltip="edit" class="create-icon mouse-events" (click)="editUpdate('edit')" tooltip="edit">create</mat-icon></span></h3>
+              matTooltip="Edit" class="create-icon mouse-events" (click)="editUpdate('edit')" tooltip="edit">create</mat-icon></span></h3>
             <div class="panel-custom clearfix">
               <div class="profile-section clearfix" style="background: #f4f4f7;">
                 <img src="{{profileDetails?.adminProfileUrl}}" (error)="setDefaultPic()"
@@ -39,7 +39,7 @@
               <div class="right-half">
                 <div class="details-color">{{profileDetails?.fullName}}</div>
               </div>
-  
+
               <div class="invLine"></div>
               <div class="left-half details-left-half">
                 <div class="bold-font">Email: </div>
@@ -54,7 +54,7 @@
               <div class="right-half">
                 <div class="details-color">{{profileDetails?.phone}}</div>
               </div>
-        
+
             </div>
 
         </div>
