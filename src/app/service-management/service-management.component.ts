@@ -155,9 +155,9 @@ export class ServiceManagementComponent implements OnInit {
     this.profileUrl = data.profileUrl;
     this.serviceForm.patchValue( {
       serviceName: data.serviceName,
-      // serviceImage: data.serviceImageUrl
+      serviceImage: data.serviceImageUrl
     });
-    this.serviceForm.value.serviceImage = data.serviceImageUrl;
+    // this.serviceForm.value.serviceImage = data.serviceImageUrl;
   }
 
   serviceDelete(value: any) {
