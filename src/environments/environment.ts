@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  BASE_URL: 'http://3.130.117.196:8081',
+  BASE_URL: 'https://devserver.swivr.co',
   API_VERSION: '/api',
   production: false
 };
