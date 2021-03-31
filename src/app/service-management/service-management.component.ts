@@ -93,6 +93,7 @@ export class ServiceManagementComponent implements OnInit {
     }
     if (this.profileUrl === ''){
       this.serviceForm.controls.serviceImage.setErrors({incorrect: true});
+      this.toastr.error('Please select the image');
       return;
     }
     // if(this.serviceForm.invalid) {
